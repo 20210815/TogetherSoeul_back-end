@@ -35,11 +35,12 @@ public class JwtAuthorizationFilter extends BasicAuthenticationFilter {
         String token = request.getHeader(JwtProperties.HEADER_STRING)
                 .replace(JwtProperties.TOKEN_PREFIX,"");
 
-        String nickName = JWT.require(Algorithm.HMAC512(JwtProperties.SECRET)).build().verify(token)
-                .getClaim("nickname").asString();
+        String identify = JWT.require(Algorithm.HMAC512(JwtProperties.SECRET)).build().verify(token)
+                .getClaim("identify").asString();
 
-        if (nickName != null) {
-            User user = authRepository.findByNickName(nickName);
+        if (identify != null) {
+            System.out.println("jwtauthorization id: " + identify);
+            User user = authRepository.findByIdentify(identify);
 
             AuthDetails authDetails = new AuthDetails(user);
             Authentication authentication = new UsernamePasswordAuthenticationToken(

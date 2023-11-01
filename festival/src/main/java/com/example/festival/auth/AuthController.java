@@ -22,18 +22,25 @@ public class AuthController {
     @PostMapping("/join")
     public Long join(@RequestBody User user) {
         User userEntity = new User();
-        if (authRepository.existsByNickName(user.getNickName())) {
-            throw new IllegalArgumentException("이미 등록된 이메일입니다.");
-        }
-
-        userEntity.setPassword(bCryptPasswordEncoder.encode(user.getPassword()));
-        userEntity.setNickName(user.getNickName());
-        userEntity.setUsername(user.getUsername());
-        userEntity.setAddress(user.getAddress());
-        userEntity.setPhoneNumber(user.getPhoneNumber());
+        userEntity.setPassword(bCryptPasswordEncoder.encode(user.getPassword())); //비밀번호 암호화
+        userEntity.setIdentify(user.getIdentify()); //아이디
+        userEntity.setNickname(user.getNickname()); //닉네임
+        userEntity.setUsername(user.getUsername()); //이름
+        userEntity.setAddress(user.getAddress()); //주소
+        userEntity.setPhoneNumber(user.getPhoneNumber()); //핸드폰 번호
         authRepository.save(userEntity);
         return userEntity.getUserId();
     }
+
+
+    @PostMapping("/confirm")
+    public int identifyConfirm(@RequestBody String identify) { //아이디 중복확인 중복: -1
+        if(authRepository.existsByIdentify(identify)) {
+            return -1;
+        }
+        else return 0;
+    }
+
 
 /*    @PostMapping("/login")
     public String login() {

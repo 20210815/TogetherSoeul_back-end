@@ -5,6 +5,6 @@ import org.springframework.data.jpa.repository.JpaRepository;
 
 public interface AuthRepository extends JpaRepository<User, Long> {
     //User findByUsername(String username);
-    User findByNickName(String nickName);
-    boolean existsByNickName(String nickName);
+    User findByIdentify(String identify);
+    boolean existsByIdentify(String identify);
 }
