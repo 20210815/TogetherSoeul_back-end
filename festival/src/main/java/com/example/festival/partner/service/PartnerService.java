@@ -25,13 +25,13 @@ public class PartnerService {
         this.authRepository = authRepository;
     }
 
-    public void boardCreate(String identify, PartnerDto partnerDto) {
+    public void partnerCreate(String identify, PartnerDto partnerDto) {
         //User user = authRepository.findByIdentify(identify);
-        partnerRepository.boardCreate(identify, partnerDto);
+        partnerRepository.partnerCreate(identify, partnerDto);
     }
 
-    public PartnerDto boardRead(Long boardId) {
-        Partner partner = this.partnerRepository.boardRead(boardId); //읽을 게시물을 찾음
+    public PartnerDto partnerRead(Long partnerId) {
+        Partner partner = this.partnerRepository.partnerRead(partnerId); //읽을 게시물을 찾음
         PartnerDto partnerDto = new PartnerDto();
         BeanUtils.copyProperties(partner, partnerDto);
 
@@ -39,24 +39,24 @@ public class PartnerService {
         return partnerDto;
     }
 
-    public List<PartnerDto> boardReadAll() {
+    public List<PartnerDto> partnerReadAll() {
         List<PartnerDto> partnerDtoList = new ArrayList<>();
-        Iterator<Partner> iterator = this.partnerRepository.boardReadAll();
+        Iterator<Partner> iterator = this.partnerRepository.partnerReadAll();
 
         while(iterator.hasNext()) {
-            PartnerDto partnerDto = boardRead(iterator.next().getBoardId());
+            PartnerDto partnerDto = partnerRead(iterator.next().getPartnerId());
             partnerDtoList.add(partnerDto);
         }
         return partnerDtoList;
     }
 
-    public void boardUpdate(Long boardId, PartnerDto partnerDto) {
-        this.partnerRepository.boardUpdate(boardId, partnerDto);
+    public void partnerUpdate(Long partnerId, PartnerDto partnerDto) {
+        this.partnerRepository.partnerUpdate(partnerId, partnerDto);
     }
 
 
-    public void boardDelete(Long boardId) {
-        this.partnerRepository.boardDelete(boardId);
+    public void partnerDelete(Long partnerId) {
+        this.partnerRepository.partnerDelete(partnerId);
     }
 
 }

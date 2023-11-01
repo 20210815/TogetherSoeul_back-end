@@ -21,28 +21,28 @@ public class PartnerController {
     }
 
     @PostMapping("/create")
-    public void boardCreate(@RequestBody PartnerDto partnerDto) {
+    public void partnerCreate(@RequestBody PartnerDto partnerDto) {
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication(); //현재 로그인한 사용자 정보
-        this.partnerService.boardCreate(authentication.getName(), partnerDto);
+        this.partnerService.partnerCreate(authentication.getName(), partnerDto);
     }
 
-    @GetMapping("/{boardId}")
-    public PartnerDto boardRead(@PathVariable("boardId") Long boardId) {
-        return this.partnerService.boardRead(boardId);
+    @GetMapping("/{partnerId}")
+    public PartnerDto partnerRead(@PathVariable("partnerId") Long partnerId) {
+        return this.partnerService.partnerRead(partnerId);
     }
 
     @GetMapping("/readAll")
-    public List<PartnerDto> boardReadAll() {
-        return this.partnerService.boardReadAll();
+    public List<PartnerDto> partnerReadAll() {
+        return this.partnerService.partnerReadAll();
     }
 
-    @PatchMapping("/{boardId}")
-    public void boardUpdate(@PathVariable("boardId") Long boardId, @RequestBody PartnerDto partnerDto) {
-        this.partnerService.boardUpdate(boardId, partnerDto);
+    @PatchMapping("/{partnerId}")
+    public void partnerUpdate(@PathVariable("partnerId") Long partnerId, @RequestBody PartnerDto partnerDto) {
+        this.partnerService.partnerUpdate(partnerId, partnerDto);
     }
 
-    @DeleteMapping("/{boardId}")
-    public void boardDelete(@PathVariable("boardId") Long boardId) {
-        this.partnerService.boardDelete(boardId);
+    @DeleteMapping("/{partnerId}")
+    public void partnerDelete(@PathVariable("partnerId") Long partnerId) {
+        this.partnerService.partnerDelete(partnerId);
     }
 }

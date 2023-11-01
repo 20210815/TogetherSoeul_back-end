@@ -12,7 +12,7 @@ import java.sql.Timestamp;
 @AllArgsConstructor
 @NoArgsConstructor
 public class PartnerDto {
-    private Long boardId;
+    private Long partnerId;
     private String title;
     private String content;
     private Timestamp createdAt;

@@ -22,7 +22,7 @@ public class PartnerRepository{
         this.authRepository = authRepository;
     }
 
-    public void boardCreate(String identify, PartnerDto partnerDto) {
+    public void partnerCreate(String identify, PartnerDto partnerDto) {
         User user = authRepository.findByIdentify(identify);
 
         Partner partner = new Partner();
@@ -31,17 +31,17 @@ public class PartnerRepository{
         this.partnerRepositoryInterface.save(partner);
     }
 
-    public Partner boardRead(Long boardId) {
-        Optional<Partner> partner = this.partnerRepositoryInterface.findById(boardId);
+    public Partner partnerRead(Long partnerId) {
+        Optional<Partner> partner = this.partnerRepositoryInterface.findById(partnerId);
         return partner.get();
     }
 
-    public Iterator<Partner> boardReadAll() {
+    public Iterator<Partner> partnerReadAll() {
         return this.partnerRepositoryInterface.findAll().iterator();
     }
 
-    public void boardUpdate(Long boardId, PartnerDto partnerDto) {
-        Partner partner = this.partnerRepositoryInterface.findById(boardId).get();
+    public void partnerUpdate(Long partnerId, PartnerDto partnerDto) {
+        Partner partner = this.partnerRepositoryInterface.findById(partnerId).get();
 
         if(partnerDto.getTitle() != null) {
             partner.setTitle(partnerDto.getTitle());
@@ -52,7 +52,7 @@ public class PartnerRepository{
         this.partnerRepositoryInterface.save(partner);
     }
 
-    public void boardDelete(Long boardId) {
-        this.partnerRepositoryInterface.deleteById(boardId);
+    public void partnerDelete(Long partnerId) {
+        this.partnerRepositoryInterface.deleteById(partnerId);
     }
 }

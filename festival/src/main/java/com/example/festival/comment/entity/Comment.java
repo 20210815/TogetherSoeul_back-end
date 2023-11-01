@@ -1,32 +1,26 @@
-package com.example.festival.partner.entity;
+package com.example.festival.comment.entity;
 
+import com.example.festival.partner.entity.Partner;
 import com.example.festival.user.entity.User;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
-import lombok.*;
+import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
-import java.sql.Date;
 import java.sql.Timestamp;
-import java.time.Instant;
-import java.time.LocalDateTime;
-import java.time.ZoneId;
 
 @Entity
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
-@Table(name = "Partner")
-public class Partner {
+@Table(name = "Comment")
+public class Comment {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "partner_id")
-    private Long partnerId;
-
-    @Column(name = "title", nullable = false, length = 100)
-    private String title; //제목
+    @Column(name = "comment_id")
+    private Long commentId;
 
     @Column(name = "content", nullable = false)
     private String content; //내용
@@ -37,6 +31,10 @@ public class Partner {
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "user_id", nullable = false)
     private User user; //작성자
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "partner_id", nullable = false)
+    private Partner partner; //동행자 게시글
 
 
     @PrePersist
