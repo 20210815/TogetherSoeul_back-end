@@ -7,6 +7,8 @@ import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 @RestController
 @RequestMapping("/api/partner")
 public class PartnerController {
@@ -27,5 +29,10 @@ public class PartnerController {
     @GetMapping("/{boardId}")
     public PartnerDto boardRead(@PathVariable("boardId") Long boardId) {
         return this.partnerService.boardRead(boardId);
+    }
+
+    @GetMapping("/readAll")
+    public List<PartnerDto> boardReadAll() {
+        return this.partnerService.boardReadAll();
     }
 }

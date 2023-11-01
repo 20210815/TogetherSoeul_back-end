@@ -8,6 +8,7 @@ import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+import java.util.Iterator;
 import java.util.Optional;
 
 @Repository
@@ -33,5 +34,9 @@ public class PartnerRepository{
     public Partner boardRead(Long boardId) {
         Optional<Partner> partner = this.partnerRepositoryInterface.findById(boardId);
         return partner.get();
+    }
+
+    public Iterator<Partner> boardReadAll() {
+        return this.partnerRepositoryInterface.findAll().iterator();
     }
 }

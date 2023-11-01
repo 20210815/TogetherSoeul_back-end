@@ -10,6 +10,10 @@ import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
+import java.util.Iterator;
+import java.util.List;
+
 @Service
 public class PartnerService {
     private final PartnerRepository partnerRepository;
@@ -33,6 +37,17 @@ public class PartnerService {
 
         partnerDto.setNickname(partner.getUser().getNickname()); // DTO에 user nickname을 넣음
         return partnerDto;
+    }
+
+    public List<PartnerDto> boardReadAll() {
+        List<PartnerDto> partnerDtoList = new ArrayList<>();
+        Iterator<Partner> iterator = this.partnerRepository.boardReadAll();
+
+        while(iterator.hasNext()) {
+            PartnerDto partnerDto = boardRead(iterator.next().getBoardId());
+            partnerDtoList.add(partnerDto);
+        }
+        return partnerDtoList;
     }
 
 }
