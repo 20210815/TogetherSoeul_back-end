@@ -30,8 +30,8 @@ public class AuthDetails implements UserDetails {
 
     @Override
     public String getUsername() {
-        return user.getNickName();
-    } // 닉네임 찾기
+        return user.getIdentify();
+    } // 아이디 전달
 
     @Override
     public boolean isAccountNonExpired() {

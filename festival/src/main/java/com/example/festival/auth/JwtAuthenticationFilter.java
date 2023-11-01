@@ -39,7 +39,7 @@ public class JwtAuthenticationFilter extends UsernamePasswordAuthenticationFilte
         System.out.println("JwtAuthenticationFilter: " +loginRequestDto);
 
         UsernamePasswordAuthenticationToken authenticationToken = new UsernamePasswordAuthenticationToken(
-                loginRequestDto.getNickName(),
+                loginRequestDto.getIdentify(),
                 loginRequestDto.getPassword());
 
         System.out.println("JwtAuthenticationFilter: 토근 생성 완료");
@@ -47,7 +47,7 @@ public class JwtAuthenticationFilter extends UsernamePasswordAuthenticationFilte
         Authentication authentication = authenticationManager.authenticate(authenticationToken);
 
         AuthDetails authDetails = (AuthDetails) authentication.getPrincipal();
-        System.out.println("Authentication: " + authDetails.getUser().getNickName());
+        System.out.println("Authentication: " + authDetails.getUser().getIdentify());
         SecurityContextHolder.getContext().setAuthentication(authentication);
         return authentication;
 
@@ -63,7 +63,7 @@ public class JwtAuthenticationFilter extends UsernamePasswordAuthenticationFilte
                 .withSubject(authDetails.getUsername())
                 .withExpiresAt(new Date(System.currentTimeMillis() + JwtProperties.EXPIRATION_TIME))
                 .withClaim("id", authDetails.getUser().getUserId())
-                .withClaim("nickName", authDetails.getUser().getNickName())
+                .withClaim("identify", authDetails.getUser().getIdentify())
                 .sign(Algorithm.HMAC512(JwtProperties.SECRET));
 
         System.out.println(jwtToken);
