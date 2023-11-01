@@ -50,4 +50,13 @@ public class PartnerService {
         return partnerDtoList;
     }
 
+    public void boardUpdate(Long boardId, PartnerDto partnerDto) {
+        this.partnerRepository.boardUpdate(boardId, partnerDto);
+    }
+
+
+    public void boardDelete(Long boardId) {
+        this.partnerRepository.boardDelete(boardId);
+    }
+
 }

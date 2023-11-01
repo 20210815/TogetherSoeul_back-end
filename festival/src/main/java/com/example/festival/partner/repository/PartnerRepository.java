@@ -39,4 +39,20 @@ public class PartnerRepository{
     public Iterator<Partner> boardReadAll() {
         return this.partnerRepositoryInterface.findAll().iterator();
     }
+
+    public void boardUpdate(Long boardId, PartnerDto partnerDto) {
+        Partner partner = this.partnerRepositoryInterface.findById(boardId).get();
+
+        if(partnerDto.getTitle() != null) {
+            partner.setTitle(partnerDto.getTitle());
+        }
+        if(partnerDto.getContent() != null) {
+            partner.setContent(partnerDto.getContent());
+        }
+        this.partnerRepositoryInterface.save(partner);
+    }
+
+    public void boardDelete(Long boardId) {
+        this.partnerRepositoryInterface.deleteById(boardId);
+    }
 }

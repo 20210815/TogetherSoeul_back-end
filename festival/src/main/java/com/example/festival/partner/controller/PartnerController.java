@@ -35,4 +35,14 @@ public class PartnerController {
     public List<PartnerDto> boardReadAll() {
         return this.partnerService.boardReadAll();
     }
+
+    @PatchMapping("/{boardId}")
+    public void boardUpdate(@PathVariable("boardId") Long boardId, @RequestBody PartnerDto partnerDto) {
+        this.partnerService.boardUpdate(boardId, partnerDto);
+    }
+
+    @DeleteMapping("/{boardId}")
+    public void boardDelete(@PathVariable("boardId") Long boardId) {
+        this.partnerService.boardDelete(boardId);
+    }
 }
