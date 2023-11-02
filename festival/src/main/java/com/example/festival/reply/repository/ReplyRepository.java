@@ -52,6 +52,7 @@ public class ReplyRepository {
             ReplyDto replyDto = new ReplyDto();
             BeanUtils.copyProperties(reply, replyDto);
             replyDto.setNickname(reply.getUser().getNickname());
+            replyDto.setAddress(reply.getUser().getAddress());
             replyDto.setCommentId(reply.getComment().getCommentId());
             replyDtos.add(replyDto);
         }
