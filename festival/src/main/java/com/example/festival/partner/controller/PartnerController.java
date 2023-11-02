@@ -20,7 +20,7 @@ public class PartnerController {
         this.partnerService = partnerService;
     }
 
-    @PostMapping("/create")
+    @PostMapping("")
     public void partnerCreate(@RequestBody PartnerDto partnerDto) {
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication(); //현재 로그인한 사용자 정보
         this.partnerService.partnerCreate(authentication.getName(), partnerDto);
@@ -31,7 +31,7 @@ public class PartnerController {
         return this.partnerService.partnerRead(partnerId);
     }
 
-    @GetMapping("/readAll")
+    @GetMapping("")
     public List<PartnerDto> partnerReadAll() {
         return this.partnerService.partnerReadAll();
     }
