@@ -5,6 +5,8 @@ import com.example.festival.comment.dto.CommentDto;
 import com.example.festival.comment.entity.Comment;
 import com.example.festival.partner.entity.Partner;
 import com.example.festival.partner.repository.PartnerRepositoryInterface;
+import com.example.festival.reply.dto.ReplyDto;
+import com.example.festival.reply.repository.ReplyRepository;
 import com.example.festival.user.entity.User;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,13 +21,16 @@ public class CommentRepository {
     private final CommentRepositoryInterface commentRepositoryInterface;
     private final AuthRepository authRepository;
     private final PartnerRepositoryInterface partnerRepositoryInterface;
+    private final ReplyRepository replyRepository;
 
     public CommentRepository(@Autowired CommentRepositoryInterface commentRepositoryInterface,
                              @Autowired AuthRepository authRepository,
-                             @Autowired PartnerRepositoryInterface partnerRepositoryInterface) {
+                             @Autowired PartnerRepositoryInterface partnerRepositoryInterface,
+                             @Autowired ReplyRepository replyRepository) {
         this.commentRepositoryInterface = commentRepositoryInterface;
         this.authRepository = authRepository;
         this.partnerRepositoryInterface = partnerRepositoryInterface;
+        this.replyRepository = replyRepository;
     }
 
     public void commentCreate(String identify, Long partnerId,CommentDto commentDto) {
@@ -50,7 +55,12 @@ public class CommentRepository {
             BeanUtils.copyProperties(comment, commentDto);
             //System.out.println("CommentDtos 과정: " + commentDto);
             commentDto.setNickname(comment.getUser().getNickname());
-            commentDto.setPartnerId(comment.getCommentId());
+            commentDto.setPartnerId(comment.getCommentId()); // 달린 댓글 하나 세팅
+
+            //댓글 하나에 대한 답글들 추가
+            List<ReplyDto> replyDtos = this.replyRepository.replyReadByComment(comment.getCommentId());
+            commentDto.setReplyDtos(replyDtos);
+
             commentDtos.add(commentDto);
         }
         return commentDtos;
