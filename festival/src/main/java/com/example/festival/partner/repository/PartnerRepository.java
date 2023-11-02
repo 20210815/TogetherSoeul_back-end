@@ -8,6 +8,7 @@ import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+import java.sql.Timestamp;
 import java.util.Iterator;
 import java.util.Optional;
 
@@ -45,9 +46,11 @@ public class PartnerRepository{
 
         if(partnerDto.getTitle() != null) {
             partner.setTitle(partnerDto.getTitle());
+            partner.setCreatedAt(new Timestamp(System.currentTimeMillis())); //시간 수정
         }
         if(partnerDto.getContent() != null) {
             partner.setContent(partnerDto.getContent());
+            partner.setCreatedAt(new Timestamp(System.currentTimeMillis())); //시간 수정
         }
         this.partnerRepositoryInterface.save(partner);
     }

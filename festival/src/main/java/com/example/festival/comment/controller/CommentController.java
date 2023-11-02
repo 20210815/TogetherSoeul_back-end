@@ -29,4 +29,14 @@ public class CommentController {
         return this.commentService.commentReadAllByPartner(partnerId);
     }
 
+    @PatchMapping("/{commentId}")
+    public String commentUpdate(@PathVariable("commentId")Long commentId, @RequestBody CommentDto commentDto) {
+        return this.commentService.commentUpdate(commentId, commentDto);
+    }
+
+    @DeleteMapping("/{commentId}")
+    public void commentDelete(@PathVariable("commentId")Long commentId) {
+        this.commentService.commentDelete(commentId);
+    }
+
 }
