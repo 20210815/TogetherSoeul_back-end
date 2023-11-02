@@ -54,7 +54,8 @@ public class CommentRepository {
             CommentDto commentDto = new CommentDto();
             BeanUtils.copyProperties(comment, commentDto);
             //System.out.println("CommentDtos 과정: " + commentDto);
-            commentDto.setNickname(comment.getUser().getNickname());
+            commentDto.setNickname(comment.getUser().getNickname()); //작성자 이름
+            commentDto.setAddress(comment.getUser().getAddress()); // 작성자 주소
             commentDto.setPartnerId(comment.getCommentId()); // 달린 댓글 하나 세팅
 
             //댓글 하나에 대한 답글들 추가
