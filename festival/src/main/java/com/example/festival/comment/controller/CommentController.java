@@ -26,8 +26,17 @@ public class CommentController {
 
     @GetMapping("/{partnerId}") // partnerId에 해당하는 댓글 불러오기
     public List<CommentDto> commentReadAllPartner(@PathVariable("partnerId")Long partnerId) {
-        System.out.println("여기임");
         return this.commentService.commentReadAllByPartner(partnerId);
+    }
+
+    @PatchMapping("/{commentId}")
+    public String commentUpdate(@PathVariable("commentId")Long commentId, @RequestBody CommentDto commentDto) {
+        return this.commentService.commentUpdate(commentId, commentDto);
+    }
+
+    @DeleteMapping("/{commentId}")
+    public void commentDelete(@PathVariable("commentId")Long commentId) {
+        this.commentService.commentDelete(commentId);
     }
 
 }

@@ -25,4 +25,12 @@ public class CommentService {
     public List<CommentDto> commentReadAllByPartner(Long partnerId) {
         return this.commentRepository.commentReadAllByPartner(partnerId);
     }
+
+    public String commentUpdate(Long commentId, CommentDto commentDto) {
+        return this.commentRepository.commentUpdate(commentId, commentDto);
+    }
+
+    public void commentDelete(Long commentId) {
+        this.commentRepository.commentDelete(commentId);
+    }
 }

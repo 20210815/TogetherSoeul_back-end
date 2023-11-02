@@ -10,6 +10,7 @@ import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -53,6 +54,21 @@ public class CommentRepository {
             commentDtos.add(commentDto);
         }
         return commentDtos;
+    }
+
+    public String commentUpdate(Long commentId, CommentDto commentDto){
+        Comment comment = this.commentRepositoryInterface.findById(commentId).get();
+        if(commentDto.getContent() == null) {
+            return "";
+        }
+        comment.setContent(commentDto.getContent());
+        comment.setCreatedAt(new Timestamp(System.currentTimeMillis())); //시간 수정
+        this.commentRepositoryInterface.save(comment);
+        return comment.getContent();
+    }
+
+    public void commentDelete(Long commentId) {
+        this.commentRepositoryInterface.deleteById(commentId);
     }
 
 }
