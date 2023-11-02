@@ -26,6 +26,7 @@ public class CommentController {
 
     @GetMapping("/{partnerId}") // partnerId에 해당하는 댓글 불러오기
     public List<CommentDto> commentReadAllPartner(@PathVariable("partnerId")Long partnerId) {
+        System.out.println("여기임");
         return this.commentService.commentReadAllByPartner(partnerId);
     }
 

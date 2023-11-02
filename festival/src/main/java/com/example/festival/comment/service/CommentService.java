@@ -23,6 +23,6 @@ public class CommentService {
     }
 
     public List<CommentDto> commentReadAllByPartner(Long partnerId) {
-        return this.commentReadAllByPartner(partnerId);
+        return this.commentRepository.commentReadAllByPartner(partnerId);
     }
 }

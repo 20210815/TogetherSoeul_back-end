@@ -47,8 +47,9 @@ public class CommentRepository {
         for(Comment comment: comments) {
             CommentDto commentDto = new CommentDto();
             BeanUtils.copyProperties(comment, commentDto);
-            System.out.println("CommentDtos 과정: " + commentDto);
-            //commentDto.setNickname(comment.getUser().getNickname());
+            //System.out.println("CommentDtos 과정: " + commentDto);
+            commentDto.setNickname(comment.getUser().getNickname());
+            commentDto.setPartnerId(comment.getCommentId());
             commentDtos.add(commentDto);
         }
         return commentDtos;
