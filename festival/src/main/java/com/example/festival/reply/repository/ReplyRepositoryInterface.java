@@ -7,4 +7,5 @@ import java.util.List;
 
 public interface ReplyRepositoryInterface extends CrudRepository<Reply, Long> {
     public List<Reply> findAllByComment_CommentId(Long commentId);
+    public int countRepliesByComment_Partner_PartnerId(Long partnerId);
 }

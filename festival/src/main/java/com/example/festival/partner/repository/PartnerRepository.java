@@ -1,8 +1,10 @@
 package com.example.festival.partner.repository;
 
 import com.example.festival.auth.repository.AuthRepository;
+import com.example.festival.comment.repository.CommentRepositoryInterface;
 import com.example.festival.partner.dto.PartnerDto;
 import com.example.festival.partner.entity.Partner;
+import com.example.festival.reply.repository.ReplyRepositoryInterface;
 import com.example.festival.user.entity.User;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,12 +17,18 @@ import java.util.Optional;
 @Repository
 public class PartnerRepository{
     private final PartnerRepositoryInterface partnerRepositoryInterface;
+    private final CommentRepositoryInterface commentRepositoryInterface;
+    private final ReplyRepositoryInterface replyRepositoryInterface;
     private final AuthRepository authRepository;
 
     public PartnerRepository(@Autowired PartnerRepositoryInterface partnerRepositoryInterface,
-                             @Autowired AuthRepository authRepository) {
+                             @Autowired AuthRepository authRepository,
+                             @Autowired CommentRepositoryInterface commentRepositoryInterface,
+                             @Autowired ReplyRepositoryInterface replyRepositoryInterface) {
         this.partnerRepositoryInterface = partnerRepositoryInterface;
         this.authRepository = authRepository;
+        this.commentRepositoryInterface = commentRepositoryInterface;
+        this.replyRepositoryInterface = replyRepositoryInterface;
     }
 
     public void partnerCreate(String identify, PartnerDto partnerDto) {
@@ -57,5 +65,9 @@ public class PartnerRepository{
 
     public void partnerDelete(Long partnerId) {
         this.partnerRepositoryInterface.deleteById(partnerId);
+    }
+
+    public int countCommentsAndReplies(Long partnerId) {
+        return this.commentRepositoryInterface.countCommentsByPartner_PartnerId(partnerId) + this.replyRepositoryInterface.countRepliesByComment_Partner_PartnerId(partnerId);
     }
 }
