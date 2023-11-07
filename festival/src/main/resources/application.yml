@@ -19,3 +19,27 @@ spring:
     multipart:
       max-file-size: 100MB
       max-request-size: 100MB
+
+
+# 아마존 설정
+cloud:
+  aws:
+    s3:
+      bucket: festival
+    stack.auto: false
+    region:
+      static: ap-northeast-2
+      auto: false
+    stack:
+      auto: false
+    credentials:
+      accessKey:
+      secretKey:
+
+
+logging:
+  level:
+    com:
+      amazonaws:
+        util:
+          EC2MetadataUtils: error
