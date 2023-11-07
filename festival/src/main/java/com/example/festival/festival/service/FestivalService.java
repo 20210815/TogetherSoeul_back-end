@@ -5,6 +5,7 @@ import com.example.festival.festival.dto.FestivalDTO;
 import com.example.festival.festival.entity.FestivalEntity;
 
 import java.util.List;
+import java.util.Optional;
 
 
 public interface FestivalService {
@@ -12,6 +13,8 @@ public interface FestivalService {
     String uploadFestival(FestivalDTO festivalDto);
 
     List<FestivalEntity> festivalList();
+
+    Optional<FestivalEntity> festivalDetail(Integer festivalId);
 
     List<FestivalEntity> searchFestival(String keyword);
 }

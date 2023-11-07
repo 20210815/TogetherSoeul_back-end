@@ -7,6 +7,7 @@ import com.example.festival.festival.repository.FestivalRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
+import javax.swing.text.html.Option;
 import java.util.List;
 import java.util.Optional;
 
@@ -33,11 +34,20 @@ public class FestivalServiceImpl implements FestivalService{
         return "축제 등록 완료";
     }
 
+    @Override
     public List<FestivalEntity> festivalList() {
 
         List<FestivalEntity> festivalList = festivalRepository.findAll();
 
         return festivalList;
+    }
+
+    @Override
+    public Optional<FestivalEntity> festivalDetail(Integer festivalId) {
+
+        Optional<FestivalEntity> festival = festivalRepository.findByFestivalId(festivalId);
+
+        return festival;
     }
 
     @Override

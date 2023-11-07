@@ -12,6 +12,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 import java.io.IOException;
 import java.util.List;
+import java.util.Optional;
 
 @RestController
 @Controller
@@ -42,6 +43,14 @@ public class FestivalController {
         List<FestivalEntity> list = festivalService.festivalList();
 
         return list;
+    }
+
+    @GetMapping("/detail")
+    public Optional<FestivalEntity> getFestivalDetail(@RequestParam("festivalId") Integer festivalId) {
+
+        Optional<FestivalEntity> festival = festivalService.festivalDetail(festivalId);
+
+        return festival;
     }
 
     @GetMapping("/search")
