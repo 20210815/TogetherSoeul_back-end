@@ -23,9 +23,10 @@ public class ReplyController {
     }
 
     @PostMapping("/{commentId}")
-    public void replyCreate(@PathVariable("commentId")Integer commentId, @RequestBody ReplyDto replyDto) {
+    public String replyCreate(@PathVariable("commentId")Integer commentId, @RequestBody ReplyDto replyDto) {
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
         this.replyService.replyCreate(authentication.getName(), replyDto, commentId);
+        return "답글 작성 완료";
     }
 
     @GetMapping("/{commentId}") //댓글 별로 답글 읽기
