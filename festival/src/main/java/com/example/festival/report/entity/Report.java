@@ -1,5 +1,6 @@
 package com.example.festival.report.entity;
 
+import com.example.festival.festival.entity.Festival;
 import com.example.festival.user.entity.User;
 import lombok.*;
 
@@ -36,6 +37,10 @@ public class Report {
 
     @Column(columnDefinition="TEXT")
     private String image;
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "festival_id", nullable = false)
+    private Festival festival; //축제 정보
 
 
     @PrePersist

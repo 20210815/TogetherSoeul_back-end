@@ -74,6 +74,13 @@ public class PartnerRepository{
         this.partnerRepositoryInterface.save(partner);
     }
 
+    public void partnerImageUpdate(Integer partnerId, String imageFile) {
+        Partner partner = this.partnerRepositoryInterface.findById(partnerId).get();
+
+        partner.setImage(imageFile);
+        partnerRepositoryInterface.save(partner);
+    }
+
     public void partnerDelete(Integer partnerId) {
         this.partnerRepositoryInterface.deleteById(partnerId);
     }

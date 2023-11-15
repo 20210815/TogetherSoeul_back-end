@@ -57,6 +57,10 @@ public class PartnerService {
         this.partnerRepository.partnerUpdate(partnerId, partnerDto);
     }
 
+    public void partnerImageUpdate(Integer partnerId, String imageFile) {
+        this.partnerRepository.partnerImageUpdate(partnerId, imageFile);
+    }
+
 
     public void partnerDelete(Integer partnerId) {
         this.partnerRepository.partnerDelete(partnerId);

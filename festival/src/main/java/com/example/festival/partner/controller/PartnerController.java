@@ -57,6 +57,12 @@ public class PartnerController {
     @PatchMapping("/{partnerId}")
     public void partnerUpdate(@PathVariable("partnerId") Integer partnerId, @RequestParam("partner") String partnerDto, @RequestParam("image") MultipartFile multipartFile) throws IOException{
 
+//        if (partnerDto != null) {
+//            String imageFile = uploadFileService.storeFile(multipartFile);
+//
+//            this.partnerService.partnerImageUpdate(partnerId, imageFile);
+//        }
+
         ObjectMapper mapper = new ObjectMapper();
         PartnerDto mapperPartnerDto = mapper.readValue(partnerDto, PartnerDto.class);
 

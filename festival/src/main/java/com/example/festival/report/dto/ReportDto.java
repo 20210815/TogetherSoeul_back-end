@@ -18,4 +18,5 @@ public class ReportDto {
     private Timestamp createdAt;
     private Boolean done; //조치 완?
     private String image; //이미지
+    private Integer festivalId; //축제 아이디
 }

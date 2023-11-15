@@ -1,6 +1,8 @@
 package com.example.festival.report.repository;
 
 import com.example.festival.auth.repository.AuthRepository;
+import com.example.festival.festival.entity.Festival;
+import com.example.festival.festival.repository.FestivalRepository;
 import com.example.festival.report.dto.ReportDto;
 import com.example.festival.report.entity.Report;
 import com.example.festival.user.entity.User;
@@ -16,33 +18,40 @@ import java.util.List;
 @Repository
 public class ReportRepository {
     private final ReportRepositoryInterface reportRepositoryInterface;
+    private final FestivalRepository festivalRepository;
     private final AuthRepository authRepository;
     public ReportRepository(
             @Autowired ReportRepositoryInterface reportRepositoryInterface,
-            @Autowired AuthRepository authRepository
+            @Autowired AuthRepository authRepository,
+            @Autowired FestivalRepository festivalRepository
     ){
         this.reportRepositoryInterface = reportRepositoryInterface;
         this.authRepository = authRepository;
+        this.festivalRepository = festivalRepository;
     }
 
     public void reportCreate(String identify, ReportDto reportDto) {
         Report report = new Report();
+        Festival festival = this.festivalRepository.findByFestivalId(reportDto.getFestivalId()).get();
         BeanUtils.copyProperties(reportDto, report);
 
         User user = this.authRepository.findByIdentify(identify);
         report.setUser(user);
         report.setDone(false);
+        report.setFestival(festival);
 
         this.reportRepositoryInterface.save(report);
     }
 
     public ReportDto reportRead(Integer reportId) {
         Report report = this.reportRepositoryInterface.findById(reportId).get();
+
         ReportDto reportDto = new ReportDto();
 
         BeanUtils.copyProperties(report, reportDto);
         reportDto.setNickname(report.getUser().getNickname());
         reportDto.setAddress(report.getUser().getAddress());
+        reportDto.setFestivalId(report.getFestival().getFestivalId());
 
         return reportDto;
     }
@@ -71,6 +80,11 @@ public class ReportRepository {
         if(reportDto.getContent() != null) {
             report.setContent(reportDto.getContent());
             report.setCreatedAt(new Timestamp(System.currentTimeMillis()));
+        }
+        if(reportDto.getImage() != null) {
+            report.setImage(reportDto.getImage());
+            report.setCreatedAt(new Timestamp(System.currentTimeMillis()));
+
         }
         this.reportRepositoryInterface.save(report);
     }
