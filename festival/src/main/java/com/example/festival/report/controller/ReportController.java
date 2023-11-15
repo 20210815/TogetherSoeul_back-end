@@ -29,7 +29,7 @@ public class ReportController {
     }
 
     @PostMapping("")
-    public void reportCreate(@RequestParam("report") String reportDto, @RequestParam("image")MultipartFile multipartFile) throws IOException {
+    public String reportCreate(@RequestParam("report") String reportDto, @RequestParam("image")MultipartFile multipartFile) throws IOException {
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
 
         ObjectMapper mapper = new ObjectMapper();
@@ -40,6 +40,7 @@ public class ReportController {
 
 
         this.reportService.reportCreate(authentication.getName(), mapperReportDto);
+        return "신고 글 작성 완료";
     }
 
     @GetMapping("/{reportId}")
@@ -64,6 +65,7 @@ public class ReportController {
         this.reportService.reportUpdate(reportId, mapperReportDto);
     }
 
+    //관리자 사용
     @PatchMapping("/{reportId}/done")
     public void reportUpdateDone(@PathVariable("reportId")Integer reportId) throws IOException{
         this.reportService.reportUpdateDone(reportId);

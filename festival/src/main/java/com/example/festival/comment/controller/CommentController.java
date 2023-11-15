@@ -19,9 +19,10 @@ public class CommentController {
     }
 
     @PostMapping("/{partnerId}")
-    public void commentCreate(@PathVariable("partnerId") Integer partnerId, @RequestBody CommentDto commentDto) {
+    public String commentCreate(@PathVariable("partnerId") Integer partnerId, @RequestBody CommentDto commentDto) {
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
         this.commentService.commentCreate(authentication.getName(), partnerId, commentDto);
+        return "댓글 작성 완료";
     }
 
     @GetMapping("/{partnerId}") // partnerId에 해당하는 댓글 불러오기
