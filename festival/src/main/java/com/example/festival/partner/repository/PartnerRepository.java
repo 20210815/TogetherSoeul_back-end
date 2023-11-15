@@ -2,7 +2,7 @@ package com.example.festival.partner.repository;
 
 import com.example.festival.auth.repository.AuthRepository;
 import com.example.festival.comment.repository.CommentRepositoryInterface;
-import com.example.festival.festival.entity.FestivalEntity;
+import com.example.festival.festival.entity.Festival;
 import com.example.festival.festival.repository.FestivalRepository;
 import com.example.festival.partner.dto.PartnerDto;
 import com.example.festival.partner.entity.Partner;
@@ -38,7 +38,7 @@ public class PartnerRepository{
 
     public void partnerCreate(String identify, PartnerDto partnerDto) {
         User user = authRepository.findByIdentify(identify);
-        FestivalEntity festival = festivalRepository.findByFestivalId(partnerDto.getFestivalId()).get();
+        Festival festival = festivalRepository.findByFestivalId(partnerDto.getFestivalId()).get();
 
         Partner partner = new Partner();
         BeanUtils.copyProperties(partnerDto, partner);

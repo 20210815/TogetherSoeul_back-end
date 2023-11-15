@@ -1,7 +1,7 @@
 package com.example.festival.event.service;
 
 import com.example.festival.event.dto.EventDTO;
-import com.example.festival.event.entity.EventEntity;
+import com.example.festival.event.entity.Event;
 
 import java.util.List;
 import java.util.Optional;
@@ -10,10 +10,10 @@ public interface EventService {
 
     String uploadEvent(EventDTO eventDTO);
 
-    List<EventEntity> eventList();
+    List<Event> eventList();
 
-    Optional<EventEntity> eventDetail(Integer eventId);
+    Optional<Event> eventDetail(Integer eventId);
 
-    List<EventEntity> searchEvent(String keyword);
+    List<Event> searchEvent(String keyword);
 
 }

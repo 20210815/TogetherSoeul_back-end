@@ -2,9 +2,8 @@ package com.example.festival.event.controller;
 
 
 import com.example.festival.event.dto.EventDTO;
-import com.example.festival.event.entity.EventEntity;
+import com.example.festival.event.entity.Event;
 import com.example.festival.event.service.EventService;
-import com.example.festival.festival.dto.FestivalDTO;
 import com.example.festival.festival.service.UploadFileService;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import lombok.RequiredArgsConstructor;
@@ -40,25 +39,25 @@ public class EventController {
     }
 
     @GetMapping("")
-    public List<EventEntity> getEventList() {
+    public List<Event> getEventList() {
 
-        List<EventEntity> list = eventService.eventList();
+        List<Event> list = eventService.eventList();
 
         return list;
     }
 
     @GetMapping("/{eventId}")
-    public Optional<EventEntity> getEventDetail(@PathVariable("eventId") Integer eventId) {
+    public Optional<Event> getEventDetail(@PathVariable("eventId") Integer eventId) {
 
-        Optional<EventEntity> event = eventService.eventDetail(eventId);
+        Optional<Event> event = eventService.eventDetail(eventId);
 
         return event;
     }
 
     @GetMapping("/search")
-    public List<EventEntity> searchEvent(@RequestParam("keyword") String keyword) {
+    public List<Event> searchEvent(@RequestParam("keyword") String keyword) {
 
-        List<EventEntity> list = eventService.searchEvent(keyword);
+        List<Event> list = eventService.searchEvent(keyword);
 
         return list;
     }

@@ -1,7 +1,7 @@
 package com.example.festival.festival.controller;
 
 import com.example.festival.festival.dto.FestivalDTO;
-import com.example.festival.festival.entity.FestivalEntity;
+import com.example.festival.festival.entity.Festival;
 import com.example.festival.festival.service.FestivalService;
 import com.example.festival.festival.service.UploadFileService;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -38,25 +38,25 @@ public class FestivalController {
     }
 
     @GetMapping("")
-    public List<FestivalEntity> getFestivalList() {
+    public List<Festival> getFestivalList() {
 
-        List<FestivalEntity> list = festivalService.festivalList();
+        List<Festival> list = festivalService.festivalList();
 
         return list;
     }
 
     @GetMapping("/{festivalId}")
-    public Optional<FestivalEntity> getFestivalDetail(@PathVariable("festivalId") Integer festivalId) {
+    public Optional<Festival> getFestivalDetail(@PathVariable("festivalId") Integer festivalId) {
 
-        Optional<FestivalEntity> festival = festivalService.festivalDetail(festivalId);
+        Optional<Festival> festival = festivalService.festivalDetail(festivalId);
 
         return festival;
     }
 
     @GetMapping("/search")
-    public List<FestivalEntity> searchFestival(@RequestParam("keyword") String keyword) {
+    public List<Festival> searchFestival(@RequestParam("keyword") String keyword) {
 
-        List<FestivalEntity> list = festivalService.searchFestival(keyword);
+        List<Festival> list = festivalService.searchFestival(keyword);
 
         return list;
     }
