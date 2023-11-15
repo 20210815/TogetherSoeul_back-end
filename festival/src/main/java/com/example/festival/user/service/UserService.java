@@ -32,6 +32,9 @@ public class UserService {
         if(userDto.getAddress() != null) {
             user.setAddress(userDto.getAddress());
         }
+        if(userDto.getImage() != null) {
+            user.setImage(userDto.getImage());
+        }
         authRepository.save(user);
     }
 }

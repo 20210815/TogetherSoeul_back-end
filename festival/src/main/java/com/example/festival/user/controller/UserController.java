@@ -1,23 +1,32 @@
 package com.example.festival.user.controller;
 
 import com.example.festival.auth.repository.AuthRepository;
+import com.example.festival.festival.dto.FestivalDTO;
 import com.example.festival.user.dto.UserDto;
 import com.example.festival.user.service.UserService;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
+import com.example.festival.festival.service.UploadFileService;
+
+import java.io.IOException;
 
 @RestController
 @RequestMapping("/api/user")
 public class UserController {
     private final UserService userService;
+    private final UploadFileService uploadFileService;
 
     public UserController(
-            @Autowired UserService userService
+            @Autowired UserService userService,
+            @Autowired UploadFileService uploadFileService
     ) {
         this.userService = userService;
+        this.uploadFileService = uploadFileService;
     }
 
     @GetMapping("/mypage")
@@ -28,8 +37,17 @@ public class UserController {
     }
 
     @PatchMapping("/update")
-    public void update(@RequestBody UserDto userDto){
+    public void update(@RequestParam("user") String userDto, @RequestParam("image") MultipartFile multipartFile) throws IOException {
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication(); //현재 로그인한 사용자 정보
-        this.userService.updateUser(authentication.getName(), userDto);
+
+        ObjectMapper mapper = new ObjectMapper();
+        UserDto mapperUserDto = mapper.readValue(userDto, UserDto.class);
+
+        String imageFile = uploadFileService.storeFile(multipartFile);
+        mapperUserDto.setImage(imageFile);
+
+//        String festival = userService.uploadFestival(mapperFestivalDTO);
+
+        this.userService.updateUser(authentication.getName(), mapperUserDto);
     }
 }

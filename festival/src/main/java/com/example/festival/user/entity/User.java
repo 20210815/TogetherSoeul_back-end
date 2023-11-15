@@ -37,6 +37,10 @@ public class User {
     @Column(name = "phone_number", nullable = false) //핸드폰 번호
     private String phoneNumber;
 
+    @Column(columnDefinition="TEXT")
+    private String image;  //이미지
+
+
 //    @Column(name = "created_at", nullable = false)
 //    private Date createdAt;
 //

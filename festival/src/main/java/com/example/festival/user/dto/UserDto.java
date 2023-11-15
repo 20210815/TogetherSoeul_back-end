@@ -13,6 +13,7 @@ public class UserDto {
     private String password;
     private String address;
     private String phoneNumber;
+    private String image;
 
     // 기본 생성자, Getter, Setter 등은 필요에 따라 추가할 수 있습니다.
 }
