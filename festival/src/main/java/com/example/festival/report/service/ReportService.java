@@ -21,7 +21,7 @@ public class ReportService {
         this.reportRepository.reportCreate(identify, reportDto);
     }
 
-    public ReportDto reportRead(Long reportId) {
+    public ReportDto reportRead(Integer reportId) {
         return this.reportRepository.reportRead(reportId);
     }
 
@@ -29,15 +29,15 @@ public class ReportService {
         return this.reportRepository.reportReadAll();
     }
 
-    public void reportUpdate(Long reportId, ReportDto reportDto) { //내용 변경
+    public void reportUpdate(Integer reportId, ReportDto reportDto) { //내용 변경
         this.reportRepository.reportUpdate(reportId, reportDto);
     }
 
-    public void reportUpdateDone(Long reportId) { //조치완료 변경
+    public void reportUpdateDone(Integer reportId) { //조치완료 변경
         this.reportRepository.reportUpdateDone(reportId);
     }
 
-    public void reportDelete(Long reportId) {
+    public void reportDelete(Integer reportId) {
         this.reportRepository.reportDelete(reportId);
     }
 }

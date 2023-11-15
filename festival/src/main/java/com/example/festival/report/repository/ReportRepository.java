@@ -36,7 +36,7 @@ public class ReportRepository {
         this.reportRepositoryInterface.save(report);
     }
 
-    public ReportDto reportRead(Long reportId) {
+    public ReportDto reportRead(Integer reportId) {
         Report report = this.reportRepositoryInterface.findById(reportId).get();
         ReportDto reportDto = new ReportDto();
 
@@ -61,7 +61,7 @@ public class ReportRepository {
     }
 
     //제목, 내용 수정
-    public void reportUpdate(Long reportId, ReportDto reportDto) {
+    public void reportUpdate(Integer reportId, ReportDto reportDto) {
         Report report = this.reportRepositoryInterface.findById(reportId).get();
 
         if(reportDto.getTitle() != null) {
@@ -76,7 +76,7 @@ public class ReportRepository {
     }
 
     // 조치완료
-    public void reportUpdateDone(Long reportId) {
+    public void reportUpdateDone(Integer reportId) {
         Report report = this.reportRepositoryInterface.findById(reportId).get();
 
         System.out.println(report.getDone());
@@ -90,7 +90,7 @@ public class ReportRepository {
         this.reportRepositoryInterface.save(report);
     }
 
-    public void reportDelete(Long reportId) {
+    public void reportDelete(Integer reportId) {
         this.reportRepositoryInterface.deleteById(reportId);
     }
 
