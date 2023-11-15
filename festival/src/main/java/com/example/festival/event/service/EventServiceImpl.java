@@ -1,7 +1,7 @@
 package com.example.festival.event.service;
 
 import com.example.festival.event.dto.EventDTO;
-import com.example.festival.event.entity.EventEntity;
+import com.example.festival.event.entity.Event;
 import com.example.festival.event.repository.EventRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -18,7 +18,7 @@ public class EventServiceImpl implements EventService{
     @Override
     public String uploadEvent(EventDTO eventDto) {
 
-        EventEntity event = EventEntity.builder()
+        Event event = Event.builder()
                 .title(eventDto.getTitle())
                 .content(eventDto.getContent())
                 .image(eventDto.getImage())
@@ -37,25 +37,25 @@ public class EventServiceImpl implements EventService{
     }
 
     @Override
-    public List<EventEntity> eventList() {
+    public List<Event> eventList() {
 
-        List<EventEntity> list = eventRepository.findAll();
+        List<Event> list = eventRepository.findAll();
 
         return list;
     }
 
     @Override
-    public Optional<EventEntity> eventDetail(Integer eventId) {
+    public Optional<Event> eventDetail(Integer eventId) {
 
-        Optional<EventEntity> event = eventRepository.findByEventId(eventId);
+        Optional<Event> event = eventRepository.findByEventId(eventId);
 
         return event;
     }
 
     @Override
-    public List<EventEntity> searchEvent(String keyword) {
+    public List<Event> searchEvent(String keyword) {
 
-        List<EventEntity> list = eventRepository.findByTitleContainingOrLocationContaining(keyword, keyword);
+        List<Event> list = eventRepository.findByTitleContainingOrLocationContaining(keyword, keyword);
 
         return list;
     }

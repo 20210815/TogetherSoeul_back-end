@@ -19,23 +19,23 @@ public class CommentController {
     }
 
     @PostMapping("/{partnerId}")
-    public void commentCreate(@PathVariable("partnerId") Long partnerId, @RequestBody CommentDto commentDto) {
+    public void commentCreate(@PathVariable("partnerId") Integer partnerId, @RequestBody CommentDto commentDto) {
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
         this.commentService.commentCreate(authentication.getName(), partnerId, commentDto);
     }
 
     @GetMapping("/{partnerId}") // partnerId에 해당하는 댓글 불러오기
-    public List<CommentDto> commentReadAllPartner(@PathVariable("partnerId")Long partnerId) {
+    public List<CommentDto> commentReadAllPartner(@PathVariable("partnerId")Integer partnerId) {
         return this.commentService.commentReadAllByPartner(partnerId);
     }
 
     @PatchMapping("/{commentId}")
-    public String commentUpdate(@PathVariable("commentId")Long commentId, @RequestBody CommentDto commentDto) {
+    public String commentUpdate(@PathVariable("commentId")Integer commentId, @RequestBody CommentDto commentDto) {
         return this.commentService.commentUpdate(commentId, commentDto);
     }
 
     @DeleteMapping("/{commentId}")
-    public void commentDelete(@PathVariable("commentId")Long commentId) {
+    public void commentDelete(@PathVariable("commentId")Integer commentId) {
         this.commentService.commentDelete(commentId);
     }
 

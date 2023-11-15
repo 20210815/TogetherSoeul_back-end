@@ -1,13 +1,11 @@
 package com.example.festival.festival.service;
 
-import com.example.festival.base.projection.festival.GetFestivalList;
 import com.example.festival.festival.dto.FestivalDTO;
-import com.example.festival.festival.entity.FestivalEntity;
+import com.example.festival.festival.entity.Festival;
 import com.example.festival.festival.repository.FestivalRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
-import javax.swing.text.html.Option;
 import java.util.List;
 import java.util.Optional;
 
@@ -20,7 +18,7 @@ public class FestivalServiceImpl implements FestivalService{
     @Override
     public String uploadFestival(FestivalDTO festivalDto){
 
-        FestivalEntity festival = FestivalEntity.builder()
+        Festival festival = Festival.builder()
                 .title(festivalDto.getTitle())
                 .content(festivalDto.getContent())
                 .image(festivalDto.getImage())
@@ -35,25 +33,25 @@ public class FestivalServiceImpl implements FestivalService{
     }
 
     @Override
-    public List<FestivalEntity> festivalList() {
+    public List<Festival> festivalList() {
 
-        List<FestivalEntity> festivalList = festivalRepository.findAll();
+        List<Festival> festivalList = festivalRepository.findAll();
 
         return festivalList;
     }
 
     @Override
-    public Optional<FestivalEntity> festivalDetail(Integer festivalId) {
+    public Optional<Festival> festivalDetail(Integer festivalId) {
 
-        Optional<FestivalEntity> festival = festivalRepository.findByFestivalId(festivalId);
+        Optional<Festival> festival = festivalRepository.findByFestivalId(festivalId);
 
         return festival;
     }
 
     @Override
-    public List<FestivalEntity> searchFestival(String keyword) {
+    public List<Festival> searchFestival(String keyword) {
 
-        List<FestivalEntity> festivalList = festivalRepository.findByTitleContainingOrLocationContaining(keyword, keyword);
+        List<Festival> festivalList = festivalRepository.findByTitleContainingOrLocationContaining(keyword, keyword);
 
         return festivalList;
     }

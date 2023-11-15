@@ -23,23 +23,23 @@ public class ReplyController {
     }
 
     @PostMapping("/{commentId}")
-    public void replyCreate(@PathVariable("commentId")Long commentId, @RequestBody ReplyDto replyDto) {
+    public void replyCreate(@PathVariable("commentId")Integer commentId, @RequestBody ReplyDto replyDto) {
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
         this.replyService.replyCreate(authentication.getName(), replyDto, commentId);
     }
 
     @GetMapping("/{commentId}") //댓글 별로 답글 읽기
-    public List<ReplyDto> replyReadByComment(@PathVariable("commentId")Long commentId) {
+    public List<ReplyDto> replyReadByComment(@PathVariable("commentId")Integer commentId) {
         return this.replyService.replyReadByComment(commentId);
     }
 
     @PatchMapping("/{replyId}")
-    public String replyUpdate(@PathVariable("replyId")Long replyId, @RequestBody ReplyDto replyDto) {
+    public String replyUpdate(@PathVariable("replyId")Integer replyId, @RequestBody ReplyDto replyDto) {
         return this.replyService.replyUpdate(replyId, replyDto);
     }
 
     @DeleteMapping("/{replyId}")
-    public void replyDelete(@PathVariable("replyId")Long replyId) {
+    public void replyDelete(@PathVariable("replyId")Integer replyId) {
         this.replyService.replyDelete(replyId);
     }
 

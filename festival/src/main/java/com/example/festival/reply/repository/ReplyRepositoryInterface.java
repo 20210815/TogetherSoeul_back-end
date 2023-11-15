@@ -5,7 +5,7 @@ import org.springframework.data.repository.CrudRepository;
 
 import java.util.List;
 
-public interface ReplyRepositoryInterface extends CrudRepository<Reply, Long> {
-    public List<Reply> findAllByComment_CommentId(Long commentId);
-    public int countRepliesByComment_Partner_PartnerId(Long partnerId);
+public interface ReplyRepositoryInterface extends CrudRepository<Reply, Integer> {
+    public List<Reply> findAllByComment_CommentId(Integer commentId);
+    public int countRepliesByComment_Partner_PartnerId(Integer partnerId);
 }

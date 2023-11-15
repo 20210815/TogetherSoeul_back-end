@@ -20,7 +20,7 @@ public class AuthController {
 
 
     @PostMapping("/join")
-    public Long join(@RequestBody User user) {
+    public Integer join(@RequestBody User user) {
         User userEntity = new User();
         userEntity.setPassword(bCryptPasswordEncoder.encode(user.getPassword())); //비밀번호 암호화
         userEntity.setIdentify(user.getIdentify()); //아이디

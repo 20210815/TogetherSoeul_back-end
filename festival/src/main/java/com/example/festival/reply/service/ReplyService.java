@@ -17,19 +17,19 @@ public class ReplyService {
         this.replyRepository = replyRepository;
     }
 
-    public void replyCreate(String identify, ReplyDto replyDto, Long commentId) {
+    public void replyCreate(String identify, ReplyDto replyDto, Integer commentId) {
         this.replyRepository.replyCreate(identify, replyDto, commentId);
     }
 
-    public List<ReplyDto> replyReadByComment(Long commentId) {
+    public List<ReplyDto> replyReadByComment(Integer commentId) {
         return replyRepository.replyReadByComment(commentId);
     }
 
-    public String replyUpdate(Long replyId, ReplyDto replyDto) {
+    public String replyUpdate(Integer replyId, ReplyDto replyDto) {
         return replyRepository.replyUpdate(replyId, replyDto);
     }
 
-    public void replyDelete(Long replyId) {
+    public void replyDelete(Integer replyId) {
         this.replyRepository.replyDelete(replyId);
     }
 

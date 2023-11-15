@@ -1,16 +1,16 @@
 package com.example.festival.event.repository;
 
-import com.example.festival.event.entity.EventEntity;
+import com.example.festival.event.entity.Event;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 import java.util.List;
 import java.util.Optional;
 
-public interface EventRepository extends JpaRepository<EventEntity, Integer> {
+public interface EventRepository extends JpaRepository<Event, Integer> {
 
-    List<EventEntity> findAll();
+    List<Event> findAll();
 
-    Optional<EventEntity> findByEventId(Integer eventId);
+    Optional<Event> findByEventId(Integer eventId);
 
-    List<EventEntity> findByTitleContainingOrLocationContaining(String keyword, String LocationKeyword);
+    List<Event> findByTitleContainingOrLocationContaining(String keyword, String LocationKeyword);
 }

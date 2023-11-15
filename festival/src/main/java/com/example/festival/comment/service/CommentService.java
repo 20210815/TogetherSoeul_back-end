@@ -18,19 +18,19 @@ public class CommentService {
         this.commentRepository = commentRepository;
     }
 
-    public void commentCreate(String identify, Long partnerId, CommentDto commentDto) {
+    public void commentCreate(String identify, Integer partnerId, CommentDto commentDto) {
         this.commentRepository.commentCreate(identify, partnerId, commentDto);
     }
 
-    public List<CommentDto> commentReadAllByPartner(Long partnerId) {
+    public List<CommentDto> commentReadAllByPartner(Integer partnerId) {
         return this.commentRepository.commentReadAllByPartner(partnerId);
     }
 
-    public String commentUpdate(Long commentId, CommentDto commentDto) {
+    public String commentUpdate(Integer commentId, CommentDto commentDto) {
         return this.commentRepository.commentUpdate(commentId, commentDto);
     }
 
-    public void commentDelete(Long commentId) {
+    public void commentDelete(Integer commentId) {
         this.commentRepository.commentDelete(commentId);
     }
 }

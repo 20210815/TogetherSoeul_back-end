@@ -2,9 +2,8 @@ package com.example.festival.event.controller;
 
 
 import com.example.festival.event.dto.EventDTO;
-import com.example.festival.event.entity.EventEntity;
+import com.example.festival.event.entity.Event;
 import com.example.festival.event.service.EventService;
-import com.example.festival.festival.dto.FestivalDTO;
 import com.example.festival.festival.service.UploadFileService;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import lombok.RequiredArgsConstructor;
@@ -25,7 +24,7 @@ public class EventController {
     private final UploadFileService uploadFileService;
     private final EventService eventService;
 
-    @PostMapping("/upload")
+    @PostMapping("")
     public String uploadEvent(@RequestParam("event") String eventDTO, @RequestParam("image") MultipartFile multipartFile) throws IOException {
 
         ObjectMapper mapper = new ObjectMapper();
@@ -39,26 +38,26 @@ public class EventController {
         return event;
     }
 
-    @GetMapping("/list")
-    public List<EventEntity> getEventList() {
+    @GetMapping("")
+    public List<Event> getEventList() {
 
-        List<EventEntity> list = eventService.eventList();
+        List<Event> list = eventService.eventList();
 
         return list;
     }
 
-    @GetMapping("/detail")
-    public Optional<EventEntity> getEventDetail(@RequestParam("eventId") Integer eventId) {
+    @GetMapping("/{eventId}")
+    public Optional<Event> getEventDetail(@PathVariable("eventId") Integer eventId) {
 
-        Optional<EventEntity> event = eventService.eventDetail(eventId);
+        Optional<Event> event = eventService.eventDetail(eventId);
 
         return event;
     }
 
     @GetMapping("/search")
-    public List<EventEntity> searchEvent(@RequestParam("keyword") String keyword) {
+    public List<Event> searchEvent(@RequestParam("keyword") String keyword) {
 
-        List<EventEntity> list = eventService.searchEvent(keyword);
+        List<Event> list = eventService.searchEvent(keyword);
 
         return list;
     }
