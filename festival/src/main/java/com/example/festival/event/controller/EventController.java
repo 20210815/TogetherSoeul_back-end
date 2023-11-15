@@ -25,7 +25,7 @@ public class EventController {
     private final UploadFileService uploadFileService;
     private final EventService eventService;
 
-    @PostMapping("/upload")
+    @PostMapping("")
     public String uploadEvent(@RequestParam("event") String eventDTO, @RequestParam("image") MultipartFile multipartFile) throws IOException {
 
         ObjectMapper mapper = new ObjectMapper();
@@ -39,7 +39,7 @@ public class EventController {
         return event;
     }
 
-    @GetMapping("/list")
+    @GetMapping("")
     public List<EventEntity> getEventList() {
 
         List<EventEntity> list = eventService.eventList();
@@ -47,8 +47,8 @@ public class EventController {
         return list;
     }
 
-    @GetMapping("/detail")
-    public Optional<EventEntity> getEventDetail(@RequestParam("eventId") Integer eventId) {
+    @GetMapping("/{eventId}")
+    public Optional<EventEntity> getEventDetail(@PathVariable("eventId") Integer eventId) {
 
         Optional<EventEntity> event = eventService.eventDetail(eventId);
 

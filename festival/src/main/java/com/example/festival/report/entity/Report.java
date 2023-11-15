@@ -24,7 +24,7 @@ public class Report {
     @Column(name = "title", nullable = false, length = 100)
     private String title; //제목
 
-    @Column(name = "content", nullable = false)
+    @Column(name = "content", nullable = false, columnDefinition="TEXT")
     private String content; //내용
 
     @Column(name = "created_at", nullable = false)

@@ -33,7 +33,7 @@ public class CommentRepository {
         this.replyRepository = replyRepository;
     }
 
-    public void commentCreate(String identify, Long partnerId,CommentDto commentDto) {
+    public void commentCreate(String identify, Integer partnerId,CommentDto commentDto) {
         Comment comment = new Comment();
         BeanUtils.copyProperties(commentDto, comment);
         User user = authRepository.findByIdentify(identify);
@@ -46,7 +46,7 @@ public class CommentRepository {
 
     }
 
-    public List<CommentDto> commentReadAllByPartner(Long partnerId) {
+    public List<CommentDto> commentReadAllByPartner(Integer partnerId) {
         List<Comment> comments = this.commentRepositoryInterface.findAllByPartner_PartnerId(partnerId);
 
         List<CommentDto> commentDtos = new ArrayList<>();
@@ -67,7 +67,7 @@ public class CommentRepository {
         return commentDtos;
     }
 
-    public String commentUpdate(Long commentId, CommentDto commentDto){
+    public String commentUpdate(Integer commentId, CommentDto commentDto){
         Comment comment = this.commentRepositoryInterface.findById(commentId).get();
         if(commentDto.getContent() == null) {
             return "";
@@ -78,7 +78,7 @@ public class CommentRepository {
         return comment.getContent();
     }
 
-    public void commentDelete(Long commentId) {
+    public void commentDelete(Integer commentId) {
         this.commentRepositoryInterface.deleteById(commentId);
     }
 

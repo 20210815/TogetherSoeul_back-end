@@ -32,7 +32,7 @@ public class ReplyRepository {
         this.commentRepositoryInterface = commentRepositoryInterface;
     }
 
-    public void replyCreate(String identify, ReplyDto replyDto, Long commentId) {
+    public void replyCreate(String identify, ReplyDto replyDto, Integer commentId) {
         Reply reply = new Reply();
         BeanUtils.copyProperties(replyDto, reply);
         User user = authRepository.findByIdentify(identify);
@@ -44,7 +44,7 @@ public class ReplyRepository {
         this.replyRepositoryInterface.save(reply);
     }
 
-    public List<ReplyDto> replyReadByComment(Long commentId) { //댓글별 답글 찾기
+    public List<ReplyDto> replyReadByComment(Integer commentId) { //댓글별 답글 찾기
         List<Reply> replies = this.replyRepositoryInterface.findAllByComment_CommentId(commentId);
         List<ReplyDto> replyDtos = new ArrayList<>();
 
@@ -60,7 +60,7 @@ public class ReplyRepository {
         return replyDtos;
     }
 
-    public String replyUpdate(Long replyId, ReplyDto replyDto) {
+    public String replyUpdate(Integer replyId, ReplyDto replyDto) {
         Reply reply = this.replyRepositoryInterface.findById(replyId).get(); //수정할 답글 찾기
 
         if(replyDto.getContent() == null) {//내용이 없다면
@@ -72,7 +72,7 @@ public class ReplyRepository {
         return reply.getContent();
     }
 
-    public void replyDelete(Long replyId) {
+    public void replyDelete(Integer replyId) {
         this.replyRepositoryInterface.deleteById(replyId);
     }
 }

@@ -21,9 +21,9 @@ public class Reply {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "reply_id")
-    private Long ReplyId;
+    private Integer ReplyId;
 
-    @Column(name = "content", nullable = false)
+    @Column(name = "content", nullable = false, columnDefinition="TEXT")
     private String content; //내용
 
     @Column(name = "created_at", nullable = false)

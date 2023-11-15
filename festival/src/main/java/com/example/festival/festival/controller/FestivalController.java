@@ -23,7 +23,7 @@ public class FestivalController {
     private final UploadFileService uploadFileService;
     private final FestivalService festivalService;
 
-    @PostMapping("/upload")
+    @PostMapping("")
     public String uploadFestival(@RequestParam("festival") String festivalDTO, @RequestParam("image") MultipartFile multipartFile) throws IOException {
 
         ObjectMapper mapper = new ObjectMapper();
@@ -37,7 +37,7 @@ public class FestivalController {
         return festival;
     }
 
-    @GetMapping("/list")
+    @GetMapping("")
     public List<FestivalEntity> getFestivalList() {
 
         List<FestivalEntity> list = festivalService.festivalList();
@@ -45,8 +45,8 @@ public class FestivalController {
         return list;
     }
 
-    @GetMapping("/detail")
-    public Optional<FestivalEntity> getFestivalDetail(@RequestParam("festivalId") Integer festivalId) {
+    @GetMapping("/{festivalId}")
+    public Optional<FestivalEntity> getFestivalDetail(@PathVariable("festivalId") Integer festivalId) {
 
         Optional<FestivalEntity> festival = festivalService.festivalDetail(festivalId);
 
