@@ -1,10 +1,7 @@
 package com.example.festival.report.entity;
 
 import com.example.festival.user.entity.User;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 import javax.persistence.*;
 import java.sql.Timestamp;
@@ -19,7 +16,7 @@ public class Report {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "report_id")
-    private Long reportId;
+    private Integer reportId;
 
     @Column(name = "title", nullable = false, length = 100)
     private String title; //제목
@@ -36,6 +33,9 @@ public class Report {
 
     @Column(name="done")
     private Boolean done = false; //조치 됐는지 (안 됐으면 - false)
+
+    @Column(columnDefinition="TEXT")
+    private String image;
 
 
     @PrePersist

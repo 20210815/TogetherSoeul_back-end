@@ -10,11 +10,12 @@ import java.sql.Timestamp;
 @AllArgsConstructor
 @NoArgsConstructor
 public class ReportDto {
-    private Long reportId;
+    private Integer reportId;
     private String nickname; //작성자 닉네임
     private String address; //작성자 주소
     private String title;
     private String content;
     private Timestamp createdAt;
     private Boolean done; //조치 완?
+    private String image; //이미지
 }
