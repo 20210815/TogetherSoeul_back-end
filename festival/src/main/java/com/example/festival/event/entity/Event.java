@@ -36,8 +36,6 @@ public class Event {
     @Column(columnDefinition="TEXT")
     private String register;
 
-    private Integer ing;
-
     @Column(nullable = false)
     private String startDay;
 
@@ -46,5 +44,8 @@ public class Event {
 
     @Column(nullable = false)
     private String resultDay;
+
+    @Column(nullable = false)
+    private Integer state;
 
 }

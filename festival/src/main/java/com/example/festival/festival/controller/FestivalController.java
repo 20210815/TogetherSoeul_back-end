@@ -54,9 +54,9 @@ public class FestivalController {
     }
 
     @GetMapping("/search")
-    public List<Festival> searchFestival(@RequestParam("keyword") String keyword) {
+    public List<Festival> searchFestival(@RequestParam("keyword") String keyword, @RequestParam("state") Integer state) {
 
-        List<Festival> list = festivalService.searchFestival(keyword);
+        List<Festival> list = festivalService.searchFestival(keyword, state);
 
         return list;
     }

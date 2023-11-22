@@ -36,4 +36,7 @@ public class Festival {
     @Column(nullable = false)
     private String endDay;
 
+    @Column(nullable = false)
+    private Integer state;
+
 }

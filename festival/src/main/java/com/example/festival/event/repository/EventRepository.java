@@ -13,4 +13,6 @@ public interface EventRepository extends JpaRepository<Event, Integer> {
     Optional<Event> findByEventId(Integer eventId);
 
     List<Event> findByTitleContainingOrLocationContaining(String keyword, String LocationKeyword);
+
+    List<Event> findByStateAndTitleContainingOrLocationContaining(Integer state, String keyword, String LocationKeyword);
 }

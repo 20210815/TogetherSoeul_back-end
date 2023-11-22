@@ -25,6 +25,7 @@ public class FestivalServiceImpl implements FestivalService{
                 .location(festivalDto.getLocation())
                 .startDay(festivalDto.getStartDay())
                 .endDay(festivalDto.getEndDay())
+                .state(festivalDto.getState())
                 .build();
 
         festivalRepository.save(festival);
@@ -41,6 +42,14 @@ public class FestivalServiceImpl implements FestivalService{
     }
 
     @Override
+    public List<Festival> festivalIngList() {
+
+        List<Festival> festivalList = festivalRepository.findAll();
+
+        return festivalList;
+    }
+
+    @Override
     public Optional<Festival> festivalDetail(Integer festivalId) {
 
         Optional<Festival> festival = festivalRepository.findByFestivalId(festivalId);
@@ -49,9 +58,9 @@ public class FestivalServiceImpl implements FestivalService{
     }
 
     @Override
-    public List<Festival> searchFestival(String keyword) {
+    public List<Festival> searchFestival(String keyword, Integer state) {
 
-        List<Festival> festivalList = festivalRepository.findByTitleContainingOrLocationContaining(keyword, keyword);
+        List<Festival> festivalList = festivalRepository.findByStateAndTitleContainingOrLocationContaining(state, keyword, keyword);
 
         return festivalList;
     }

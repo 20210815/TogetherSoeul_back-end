@@ -13,7 +13,9 @@ public interface FestivalService {
 
     List<Festival> festivalList();
 
+    List<Festival> festivalIngList();
+
     Optional<Festival> festivalDetail(Integer festivalId);
 
-    List<Festival> searchFestival(String keyword);
+    List<Festival> searchFestival(String keyword, Integer state);
 }

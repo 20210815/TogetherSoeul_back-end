@@ -25,10 +25,10 @@ public class EventServiceImpl implements EventService{
                 .location(eventDto.getLocation())
                 .rule(eventDto.getRule())
                 .register(eventDto.getRegister())
-                .ing(eventDto.getIng())
                 .startDay(eventDto.getStartDay())
                 .endDay(eventDto.getEndDay())
                 .resultDay(eventDto.getResultDay())
+                .state(eventDto.getState())
                 .build();
 
         eventRepository.save(event);
@@ -53,9 +53,9 @@ public class EventServiceImpl implements EventService{
     }
 
     @Override
-    public List<Event> searchEvent(String keyword) {
+    public List<Event> searchEvent(String keyword, Integer state) {
 
-        List<Event> list = eventRepository.findByTitleContainingOrLocationContaining(keyword, keyword);
+        List<Event> list = eventRepository.findByStateAndTitleContainingOrLocationContaining(state, keyword, keyword);
 
         return list;
     }

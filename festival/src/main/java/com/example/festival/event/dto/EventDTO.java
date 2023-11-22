@@ -32,9 +32,6 @@ public class EventDTO {
     private String register;
 
     @Nullable
-    private Integer ing;
-
-    @Nullable
     private String startDay;
 
     @Nullable
@@ -42,5 +39,8 @@ public class EventDTO {
 
     @Nullable
     private String resultDay;
+
+    @Nullable
+    private Integer state;
 
 }

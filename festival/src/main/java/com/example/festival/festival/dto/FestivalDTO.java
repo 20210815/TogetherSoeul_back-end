@@ -29,4 +29,7 @@ public class FestivalDTO {
 
     @Nullable
     private String endDay;
+
+    @Nullable
+    private Integer state;
 }
