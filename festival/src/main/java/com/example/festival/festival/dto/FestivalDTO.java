@@ -32,4 +32,9 @@ public class FestivalDTO {
 
     @Nullable
     private Integer state;
+
+    @Nullable
+    private Integer view;
+
+
 }

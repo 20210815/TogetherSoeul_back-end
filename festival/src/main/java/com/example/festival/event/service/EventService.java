@@ -16,4 +16,7 @@ public interface EventService {
 
     List<Event> searchEvent(String keyword, Integer state);
 
+    List<Event> eventStateList(Integer state);
+
+    Optional<Event> topViewEvent();
 }

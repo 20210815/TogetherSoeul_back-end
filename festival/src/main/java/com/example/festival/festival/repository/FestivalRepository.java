@@ -17,4 +17,6 @@ public interface FestivalRepository extends JpaRepository<Festival, Integer> {
     List<Festival> findByStateAndTitleContainingOrLocationContaining(Integer state, String keyword, String LocationKeyword);
 
     List<Festival> findByState(Integer state);
+
+    Optional<Festival> findTop1ByOrderByViewDesc();
 }

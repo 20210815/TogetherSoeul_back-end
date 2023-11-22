@@ -43,4 +43,7 @@ public class EventDTO {
     @Nullable
     private Integer state;
 
+    @Nullable
+    private Integer view;
+
 }

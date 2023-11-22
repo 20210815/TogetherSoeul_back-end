@@ -29,6 +29,7 @@ public class EventServiceImpl implements EventService{
                 .endDay(eventDto.getEndDay())
                 .resultDay(eventDto.getResultDay())
                 .state(eventDto.getState())
+                .view(0)
                 .build();
 
         eventRepository.save(event);
@@ -49,6 +50,10 @@ public class EventServiceImpl implements EventService{
 
         Optional<Event> event = eventRepository.findByEventId(eventId);
 
+        event.get().setView(event.get().getView()+1);
+
+        eventRepository.save(event.get());
+
         return event;
     }
 
@@ -60,6 +65,19 @@ public class EventServiceImpl implements EventService{
         return list;
     }
 
+    @Override
+    public List<Event> eventStateList(Integer state) {
 
+        List<Event> list = eventRepository.findByState(state);
 
+        return list;
+    }
+
+    @Override
+    public Optional<Event> topViewEvent() {
+
+        Optional<Event> event = eventRepository.findTop1ByOrderByViewDesc();
+
+        return event;
+    }
 }

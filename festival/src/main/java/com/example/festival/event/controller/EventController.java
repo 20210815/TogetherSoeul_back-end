@@ -62,5 +62,19 @@ public class EventController {
         return list;
     }
 
+    @GetMapping("/list")
+    public List<Event> getEventStateList(@RequestParam("state") Integer state) {
 
+        List<Event> list = eventService.eventStateList(state);
+
+        return list;
+    }
+
+    @GetMapping("/view")
+    public Optional<Event> getTopViewEvent() {
+
+        Optional<Event> event = eventService.topViewEvent();
+
+        return event;
+    }
 }

@@ -15,4 +15,8 @@ public interface EventRepository extends JpaRepository<Event, Integer> {
     List<Event> findByTitleContainingOrLocationContaining(String keyword, String LocationKeyword);
 
     List<Event> findByStateAndTitleContainingOrLocationContaining(Integer state, String keyword, String LocationKeyword);
+
+    List<Event> findByState(Integer state);
+
+    Optional<Event> findTop1ByOrderByViewDesc();
 }
