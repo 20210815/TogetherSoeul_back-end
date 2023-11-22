@@ -39,4 +39,7 @@ public class Festival {
     @Column(nullable = false)
     private Integer state;
 
+    @Column(nullable = false)
+    private Integer view;
+
 }

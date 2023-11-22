@@ -18,4 +18,8 @@ public interface FestivalService {
     Optional<Festival> festivalDetail(Integer festivalId);
 
     List<Festival> searchFestival(String keyword, Integer state);
+
+    List<Festival> festivalListState(Integer state);
+
+    Optional<Festival> topViewFestival();
 }

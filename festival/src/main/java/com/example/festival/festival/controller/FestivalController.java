@@ -60,4 +60,20 @@ public class FestivalController {
 
         return list;
     }
+
+    @GetMapping("/list")
+    public List<Festival> getFestivalStateList(@RequestParam("state") Integer state) {
+
+        List<Festival> list = festivalService.festivalListState(state);
+
+        return list;
+    }
+
+    @GetMapping("/view")
+    public Optional<Festival> getTopViewFestival() {
+
+        Optional<Festival> festival = festivalService.topViewFestival();
+
+        return festival;
+    }
 }

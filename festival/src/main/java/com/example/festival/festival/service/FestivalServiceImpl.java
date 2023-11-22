@@ -26,6 +26,7 @@ public class FestivalServiceImpl implements FestivalService{
                 .startDay(festivalDto.getStartDay())
                 .endDay(festivalDto.getEndDay())
                 .state(festivalDto.getState())
+                .view(0)
                 .build();
 
         festivalRepository.save(festival);
@@ -54,6 +55,10 @@ public class FestivalServiceImpl implements FestivalService{
 
         Optional<Festival> festival = festivalRepository.findByFestivalId(festivalId);
 
+        festival.get().setView(festival.get().getView() + 1);
+
+        festivalRepository.save(festival.get());
+
         return festival;
     }
 
@@ -63,5 +68,21 @@ public class FestivalServiceImpl implements FestivalService{
         List<Festival> festivalList = festivalRepository.findByStateAndTitleContainingOrLocationContaining(state, keyword, keyword);
 
         return festivalList;
+    }
+
+    @Override
+    public List<Festival> festivalListState(Integer state) {
+
+        List<Festival> festivalList = festivalRepository.findByState(state);
+
+        return festivalList;
+    }
+
+    @Override
+    public Optional<Festival> topViewFestival() {
+
+        Optional<Festival> festival = festivalRepository.findTop1ByOrderByViewDesc();
+
+        return festival;
     }
 }
