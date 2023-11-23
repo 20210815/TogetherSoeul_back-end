@@ -1,5 +1,6 @@
 package com.example.festival.partner.controller;
 
+import com.example.festival.festival.service.AmazonS3Service;
 import com.example.festival.festival.service.UploadFileService;
 import com.example.festival.partner.dto.PartnerDto;
 import com.example.festival.partner.service.PartnerService;
@@ -19,14 +20,14 @@ import java.util.List;
 @RequestMapping("/api/partner")
 public class PartnerController {
     private final PartnerService partnerService;
-    private final UploadFileService uploadFileService;
+    private final AmazonS3Service amazonS3Service;
 
     public PartnerController(
             @Autowired PartnerService partnerService,
-            @Autowired UploadFileService uploadFileService
-    ) {
+            @Autowired AmazonS3Service amazonS3Service
+            ) {
         this.partnerService = partnerService;
-        this.uploadFileService = uploadFileService;
+        this.amazonS3Service = amazonS3Service;
     }
 
 
@@ -37,7 +38,7 @@ public class PartnerController {
         ObjectMapper mapper = new ObjectMapper();
         PartnerDto mapperPartnerDto = mapper.readValue(partnerDto, PartnerDto.class);
 
-        String imageFile = uploadFileService.storeFile(multipartFile);
+        String imageFile = amazonS3Service.saveFile(multipartFile);
         mapperPartnerDto.setImage(imageFile);
         this.partnerService.partnerCreate(authentication.getName(), mapperPartnerDto);
 
@@ -66,7 +67,7 @@ public class PartnerController {
         ObjectMapper mapper = new ObjectMapper();
         PartnerDto mapperPartnerDto = mapper.readValue(partnerDto, PartnerDto.class);
 
-        String imageFile = uploadFileService.storeFile(multipartFile);
+        String imageFile = amazonS3Service.saveFile(multipartFile);
         mapperPartnerDto.setImage(imageFile);
 
         this.partnerService.partnerUpdate(partnerId, mapperPartnerDto);

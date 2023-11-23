@@ -25,7 +25,7 @@ spring:
 cloud:
   aws:
     s3:
-      bucket: festival
+      bucket: myfestival
     stack.auto: false
     region:
       static: ap-northeast-2

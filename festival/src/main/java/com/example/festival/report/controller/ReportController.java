@@ -1,5 +1,6 @@
 package com.example.festival.report.controller;
 
+import com.example.festival.festival.service.AmazonS3Service;
 import com.example.festival.festival.service.UploadFileService;
 import com.example.festival.partner.dto.PartnerDto;
 import com.example.festival.report.dto.ReportDto;
@@ -18,14 +19,14 @@ import java.util.List;
 @RequestMapping("/api/report")
 public class ReportController {
     private final ReportService reportService;
-    private final UploadFileService uploadFileService;
+    private final AmazonS3Service amazonS3Service;
 
     public ReportController(
             @Autowired ReportService reportService,
-            @Autowired UploadFileService uploadFileService
+            @Autowired AmazonS3Service amazonS3Service
     ) {
         this.reportService = reportService;
-        this.uploadFileService = uploadFileService;
+        this.amazonS3Service = amazonS3Service;
     }
 
     @PostMapping("")
@@ -35,7 +36,7 @@ public class ReportController {
         ObjectMapper mapper = new ObjectMapper();
         ReportDto mapperReportDto = mapper.readValue(reportDto, ReportDto.class);
 
-        String imageFile = uploadFileService.storeFile(multipartFile);
+        String imageFile = amazonS3Service.saveFile(multipartFile);
         mapperReportDto.setImage(imageFile);
 
 
@@ -59,7 +60,7 @@ public class ReportController {
         ObjectMapper mapper = new ObjectMapper();
         ReportDto mapperReportDto = mapper.readValue(reportDto, ReportDto.class);
 
-        String imageFile = uploadFileService.storeFile(multipartFile);
+        String imageFile = amazonS3Service.saveFile(multipartFile);
         mapperReportDto.setImage(imageFile);
 
         this.reportService.reportUpdate(reportId, mapperReportDto);

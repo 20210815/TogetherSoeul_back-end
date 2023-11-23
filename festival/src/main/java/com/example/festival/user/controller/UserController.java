@@ -2,6 +2,7 @@ package com.example.festival.user.controller;
 
 import com.example.festival.auth.repository.AuthRepository;
 import com.example.festival.festival.dto.FestivalDTO;
+import com.example.festival.festival.service.AmazonS3Service;
 import com.example.festival.user.dto.UserDto;
 import com.example.festival.user.service.UserService;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -19,14 +20,14 @@ import java.io.IOException;
 @RequestMapping("/api/user")
 public class UserController {
     private final UserService userService;
-    private final UploadFileService uploadFileService;
+    private final AmazonS3Service amazonS3Service;
 
     public UserController(
             @Autowired UserService userService,
-            @Autowired UploadFileService uploadFileService
+            @Autowired AmazonS3Service amazonS3Service
     ) {
         this.userService = userService;
-        this.uploadFileService = uploadFileService;
+        this.amazonS3Service = amazonS3Service;
     }
 
     @GetMapping("/mypage")
@@ -43,7 +44,7 @@ public class UserController {
         ObjectMapper mapper = new ObjectMapper();
         UserDto mapperUserDto = mapper.readValue(userDto, UserDto.class);
 
-        String imageFile = uploadFileService.storeFile(multipartFile);
+        String imageFile = amazonS3Service.saveFile(multipartFile);
         mapperUserDto.setImage(imageFile);
 
 //        String festival = userService.uploadFestival(mapperFestivalDTO);
