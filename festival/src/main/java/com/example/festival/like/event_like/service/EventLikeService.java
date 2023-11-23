@@ -98,4 +98,18 @@ public class EventLikeService {
 
         return 0;
     }
+
+    //좋아요 이벤트 목록 나열
+    public List<Event> likeEventList(String identify) {
+        User user = this.authRepository.findByIdentify(identify);
+        List<Event> events = new ArrayList<>();
+
+        List<Event_like> eventLikes = this.eventLikeInterface.findByUser(user);
+        for(Event_like eventLike : eventLikes) {
+            Event event = eventLike.getEvent();
+            events.add(event);
+        }
+
+        return events;
+    }
 }
