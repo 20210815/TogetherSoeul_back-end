@@ -12,6 +12,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class FestivalLikeService {
@@ -84,6 +85,19 @@ public class FestivalLikeService {
         }
 
         return festivalList;
+    }
+
+    public Integer checkFestivalLike(String userId, Integer festivalId) {
+        User user = this.authRepository.findByIdentify(userId);
+        Festival festival = this.festivalRepository.findByFestivalId(festivalId).get();
+
+        Festival_like like = festivalLikeInterface.findByUserAndFestival(user, festival);
+
+        if(like!=null){
+            return 1;
+        }
+
+        return 0;
     }
 
 }

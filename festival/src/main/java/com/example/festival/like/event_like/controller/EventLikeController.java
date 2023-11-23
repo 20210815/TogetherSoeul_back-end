@@ -54,4 +54,13 @@ public class EventLikeController {
         return this.eventLikeService.rankByFestival();
     }
 
+    @GetMapping("/check")
+    public Integer checkLike(@RequestParam("eventId") Integer eventId) {
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+
+        Integer like = eventLikeService.checkEventLike(authentication.getName(), eventId);
+
+        return like;
+    }
+
 }

@@ -3,14 +3,13 @@ package com.example.festival.like.festival_like.entity;
 import com.example.festival.festival.entity.Festival;
 import com.example.festival.partner.entity.Partner;
 import com.example.festival.user.entity.User;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 import javax.persistence.*;
 import java.sql.Timestamp;
 
+@Setter
+@Getter
 @Entity
 @Data
 @AllArgsConstructor

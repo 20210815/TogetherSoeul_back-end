@@ -4,8 +4,10 @@ import com.example.festival.auth.repository.AuthRepository;
 import com.example.festival.event.entity.Event;
 import com.example.festival.event.repository.EventRepository;
 import com.example.festival.festival.entity.Festival;
+import com.example.festival.like.event_like.entity.Event_like;
 import com.example.festival.like.event_like.repository.EventLikeInterface;
 import com.example.festival.like.event_like.repository.EventLikeRepository;
+import com.example.festival.like.festival_like.entity.Festival_like;
 import com.example.festival.user.entity.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -82,5 +84,18 @@ public class EventLikeService {
         }
 
         return festivalList;
+    }
+
+    public Integer checkEventLike(String userId, Integer eventId) {
+        User user = this.authRepository.findByIdentify(userId);
+        Event event = this.eventRepository.findByEventId(eventId).get();
+
+        Event_like like = eventLikeInterface.findByUserAndEvent(user, event);
+
+        if(like!=null){
+            return 1;
+        }
+
+        return 0;
     }
 }

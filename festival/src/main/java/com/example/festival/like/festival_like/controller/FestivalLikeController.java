@@ -54,4 +54,13 @@ public class FestivalLikeController {
     public List<Festival> rankByFestivalLike() {
         return this.festivalLikeService.rankByFestival();
     }
+
+    @GetMapping("/check")
+    public Integer checkLike(@RequestParam("festivalId") Integer festivalId) {
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+
+        Integer like = festivalLikeService.checkFestivalLike(authentication.getName(), festivalId);
+
+        return like;
+    }
 }
