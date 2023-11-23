@@ -2,6 +2,7 @@ package com.example.festival.festival.controller;
 
 import com.example.festival.festival.dto.FestivalDTO;
 import com.example.festival.festival.entity.Festival;
+import com.example.festival.festival.service.AmazonS3Service;
 import com.example.festival.festival.service.FestivalService;
 import com.example.festival.festival.service.UploadFileService;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -20,7 +21,7 @@ import java.util.Optional;
 @RequestMapping("/api/festival")
 public class FestivalController {
 
-    private final UploadFileService uploadFileService;
+    private final AmazonS3Service amazonS3Service;
     private final FestivalService festivalService;
 
     @PostMapping("")
@@ -29,7 +30,7 @@ public class FestivalController {
         ObjectMapper mapper = new ObjectMapper();
         FestivalDTO mapperFestivalDTO = mapper.readValue(festivalDTO, FestivalDTO.class);
 
-        String imageFile = uploadFileService.storeFile(multipartFile);
+        String imageFile = amazonS3Service.saveFile(multipartFile);
         mapperFestivalDTO.setImage(imageFile);
 
         String festival = festivalService.uploadFestival(mapperFestivalDTO);

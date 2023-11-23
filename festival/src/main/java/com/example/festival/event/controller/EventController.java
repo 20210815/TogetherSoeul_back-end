@@ -4,6 +4,7 @@ package com.example.festival.event.controller;
 import com.example.festival.event.dto.EventDTO;
 import com.example.festival.event.entity.Event;
 import com.example.festival.event.service.EventService;
+import com.example.festival.festival.service.AmazonS3Service;
 import com.example.festival.festival.service.UploadFileService;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import lombok.RequiredArgsConstructor;
@@ -21,7 +22,7 @@ import java.util.Optional;
 @RequestMapping("/api/event")
 public class EventController {
 
-    private final UploadFileService uploadFileService;
+    private final AmazonS3Service amazonS3Service;
     private final EventService eventService;
 
     @PostMapping("")
@@ -30,7 +31,7 @@ public class EventController {
         ObjectMapper mapper = new ObjectMapper();
         EventDTO mapperEventDTO = mapper.readValue(eventDTO, EventDTO.class);
 
-        String imageFile = uploadFileService.storeFile(multipartFile);
+        String imageFile = amazonS3Service.saveFile(multipartFile);
         mapperEventDTO.setImage(imageFile);
 
         String event = eventService.uploadEvent(mapperEventDTO);
