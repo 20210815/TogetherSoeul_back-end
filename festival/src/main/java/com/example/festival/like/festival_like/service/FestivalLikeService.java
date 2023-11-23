@@ -100,4 +100,22 @@ public class FestivalLikeService {
         return 0;
     }
 
+    //좋아요한 축제 목록 나열
+    public List<Festival> likeFestivalList(String identify) {
+        User user = this.authRepository.findByIdentify(identify);
+        List<Festival> festivalList = new ArrayList<>();
+
+        List<Festival_like> festivalLikes = this.festivalLikeInterface.findByUser(user);
+
+        System.out.println(festivalLikes);
+        for (Festival_like festivalLike: festivalLikes) {
+            Festival festival = this.festivalRepository.findByFestivalId(festivalLike.getFestival().getFestivalId()).get();
+            System.out.println(festival);
+            festivalList.add(festival);
+        }
+
+        return festivalList;
+
+    }
+
 }

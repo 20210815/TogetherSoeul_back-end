@@ -63,4 +63,12 @@ public class FestivalLikeController {
 
         return like;
     }
+
+    //좋아요한 목록 나열
+    @GetMapping("/list")
+    public List<Festival> likeAllFestival() {
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+
+        return this.festivalLikeService.likeFestivalList(authentication.getName());
+    }
 }

@@ -20,12 +20,12 @@ import java.sql.Timestamp;
 public class Festival_like {
 
     @Id
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "user_id", nullable = false)
     private User user; //작성자
 
     @Id
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "festival_id", nullable = false)
     private Festival festival; //축제 글
 }

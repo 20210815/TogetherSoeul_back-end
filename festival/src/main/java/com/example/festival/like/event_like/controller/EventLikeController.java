@@ -63,4 +63,12 @@ public class EventLikeController {
         return like;
     }
 
+    //이벤트 좋아요 목록 나열
+    @GetMapping("/list")
+    public List<Event> likeEventList() {
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+
+        return this.eventLikeService.likeEventList(authentication.getName());
+    }
+
 }

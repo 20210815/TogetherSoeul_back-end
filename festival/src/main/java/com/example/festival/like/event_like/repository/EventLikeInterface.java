@@ -14,7 +14,7 @@ import java.util.List;
 public interface EventLikeInterface extends CrudRepository<Event_like, Event_Like_id> {
     public Event_like findByUserAndEvent(User user, Event event);
     public Integer countEvent_likeByEvent (Event event);
-    public List<Integer> findByUser(User user);
+    public List<Event_like> findByUser(User user);
 
     @Query(value = "select event_id from event_like " +
             "group by event_like.event_id " +
