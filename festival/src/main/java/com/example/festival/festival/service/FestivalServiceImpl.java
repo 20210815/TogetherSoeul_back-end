@@ -3,6 +3,7 @@ package com.example.festival.festival.service;
 import com.example.festival.festival.dto.FestivalDTO;
 import com.example.festival.festival.entity.Festival;
 import com.example.festival.festival.repository.FestivalRepository;
+import com.example.festival.like.festival_like.repository.FestivalLikeRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -14,6 +15,7 @@ import java.util.Optional;
 public class FestivalServiceImpl implements FestivalService{
 
     private final FestivalRepository festivalRepository;
+    private final FestivalLikeRepository festivalLikeRepository;
 
     @Override
     public String uploadFestival(FestivalDTO festivalDto){
@@ -28,7 +30,6 @@ public class FestivalServiceImpl implements FestivalService{
                 .state(festivalDto.getState())
                 .view(0)
                 .build();
-
         festivalRepository.save(festival);
 
         return "축제 등록 완료";
