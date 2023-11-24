@@ -3,6 +3,7 @@ package com.example.festival.event.service;
 import com.example.festival.event.dto.EventDTO;
 import com.example.festival.event.entity.Event;
 import com.example.festival.event.repository.EventRepository;
+import com.example.festival.festival.entity.Festival;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -23,6 +24,7 @@ public class EventServiceImpl implements EventService{
                 .content(eventDto.getContent())
                 .image(eventDto.getImage())
                 .location(eventDto.getLocation())
+                .region(eventDto.getRegion())
                 .rule(eventDto.getRule())
                 .register(eventDto.getRegister())
                 .startDay(eventDto.getStartDay())
@@ -58,11 +60,26 @@ public class EventServiceImpl implements EventService{
     }
 
     @Override
-    public List<Event> searchEvent(String keyword, Integer state) {
+    public List<Event> searchEvent(String keyword, Integer state, String region) {
 
-        List<Event> list = eventRepository.findByStateAndTitleContainingOrLocationContaining(state, keyword, keyword);
+        if (state != null && !region.isBlank()) { // 상태랑 구 모두 선택
+            List<Event> eventList = eventRepository.findByStateAndRegionAndTitleContainingOrLocationContaining(state, region, keyword, keyword);
 
-        return list;
+            return eventList;
+        } if(state != null && region.isBlank()) { // 상태만 선택
+            List<Event> eventList = eventRepository.findByStateAndTitleContainingOrLocationContaining(state, keyword, keyword);
+
+            return eventList;
+        }
+        else if (state == null && !region.isBlank()) { // 구만 선택
+            List<Event> eventList = eventRepository.findByRegionAndTitleContainingOrLocationContaining(region, keyword, keyword);
+
+            return eventList;
+        }
+
+        List<Event> eventList = eventRepository.findByTitleContainingOrLocationContaining(keyword, keyword);
+
+        return eventList;
     }
 
     @Override
