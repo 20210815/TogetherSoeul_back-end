@@ -16,6 +16,7 @@ public class CommentDto {
     private Integer commentId;
     private String nickname; //댓글 작성자
     private String address; //작성자 주소
+    private String userimage; //작성자 프사
     private Integer partnerId; //게시글
     private String content; //내용
     private Timestamp createdAt; //작성일

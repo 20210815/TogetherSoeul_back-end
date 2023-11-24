@@ -36,6 +36,7 @@ public class PartnerService {
         BeanUtils.copyProperties(partner, partnerDto);
 
         partnerDto.setNickname(partner.getUser().getNickname()); // DTO에 user nickname을 넣음
+        partnerDto.setUserimage(partner.getUser().getImage());
         partnerDto.setAddress(partner.getUser().getAddress()); //DTO에 user address를 넣음
         partnerDto.setFestivalId(partner.getFestival().getFestivalId()); // DTO에 FestivalId 넣음
         partnerDto.setCount(this.partnerRepository.countCommentsAndReplies(partnerId));

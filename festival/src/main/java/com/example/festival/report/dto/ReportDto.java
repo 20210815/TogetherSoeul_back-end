@@ -12,6 +12,7 @@ import java.sql.Timestamp;
 public class ReportDto {
     private Integer reportId;
     private String nickname; //작성자 닉네임
+    private String userimage; //작성자 프사
     private String address; //작성자 주소
     private String title;
     private String content;
