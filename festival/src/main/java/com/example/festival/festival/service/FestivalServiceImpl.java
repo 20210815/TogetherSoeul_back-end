@@ -25,6 +25,7 @@ public class FestivalServiceImpl implements FestivalService{
                 .content(festivalDto.getContent())
                 .image(festivalDto.getImage())
                 .location(festivalDto.getLocation())
+                .region(festivalDto.getRegion())
                 .startDay(festivalDto.getStartDay())
                 .endDay(festivalDto.getEndDay())
                 .state(festivalDto.getState())
@@ -64,11 +65,27 @@ public class FestivalServiceImpl implements FestivalService{
     }
 
     @Override
-    public List<Festival> searchFestival(String keyword, Integer state) {
+    public List<Festival> searchFestival(String keyword, Integer state, String region) {
 
-        List<Festival> festivalList = festivalRepository.findByStateAndTitleContainingOrLocationContaining(state, keyword, keyword);
+        if (state != null && !region.isBlank()) { // 상태랑 구 모두 선택
+            List<Festival> festivalList = festivalRepository.findByStateAndRegionAndTitleContainingOrLocationContaining(state, region, keyword, keyword);
+
+            return festivalList;
+        } if(state != null && region.isBlank()) { // 상태만 선택
+            List<Festival> festivalList = festivalRepository.findByStateAndTitleContainingOrLocationContaining(state, keyword, keyword);
+
+            return festivalList;
+        }
+        else if (state == null && !region.isBlank()) { // 구만 선택
+            List<Festival> festivalList = festivalRepository.findByRegionAndTitleContainingOrLocationContaining(region, keyword, keyword);
+
+            return festivalList;
+        }
+
+        List<Festival> festivalList = festivalRepository.findByTitleContainingOrLocationContaining(keyword, keyword);
 
         return festivalList;
+
     }
 
     @Override
