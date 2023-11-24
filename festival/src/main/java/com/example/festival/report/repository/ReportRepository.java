@@ -50,6 +50,7 @@ public class ReportRepository {
 
         BeanUtils.copyProperties(report, reportDto);
         reportDto.setNickname(report.getUser().getNickname());
+        reportDto.setUserimage(report.getUser().getImage());
         reportDto.setAddress(report.getUser().getAddress());
         reportDto.setFestivalId(report.getFestival().getFestivalId());
 
@@ -62,8 +63,7 @@ public class ReportRepository {
         List<ReportDto> reportDtos = new ArrayList<>();
 
         while(iterator.hasNext()) {
-            ReportDto reportDto = new ReportDto();
-            reportDto = reportRead(iterator.next().getReportId());
+            ReportDto reportDto = reportRead(iterator.next().getReportId());
             reportDtos.add(reportDto);
         }
         return reportDtos;
