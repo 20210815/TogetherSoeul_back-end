@@ -11,5 +11,7 @@ public interface IdeaRepository extends JpaRepository<Idea, Integer> {
 
     List<GetIdea> findAllProjectedBy();
 
-    Optional<GetIdea> findByIdeaId(Integer integer);
+    Optional<GetIdea> findByIdeaId(Integer ideaId);
+
+    void deleteByIdeaId(Integer ideaId);
 }

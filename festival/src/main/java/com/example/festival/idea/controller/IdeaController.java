@@ -29,14 +29,14 @@ public class IdeaController {
 
     // 아이디어 제안 포스트 등록
     @PostMapping("")
-    public String uploadFestival(@RequestParam("idea") String ideaDto, @RequestParam("image") MultipartFile multipartFile) throws IOException {
+    public String uploadIdea(@RequestParam("idea") String ideaDto, @RequestParam("image") List<MultipartFile> multipartFiles) throws IOException {
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
 
         ObjectMapper mapper = new ObjectMapper();
         IdeaDto mapperIdeaDTO = mapper.readValue(ideaDto, IdeaDto.class);
 
-        String imageFile = amazonS3Service.saveFile(multipartFile);
-        mapperIdeaDTO.setImage(imageFile);
+        List<String> imageFile = amazonS3Service.saveFiles(multipartFiles);
+        mapperIdeaDTO.setImage(imageFile.toString());
 
         String idea = ideaService.uploadIdeaPost(mapperIdeaDTO, authentication.getName());
 
@@ -59,6 +59,15 @@ public class IdeaController {
         Optional<GetIdea> idea = ideaService.ideaDetail(ideaId);
 
         return idea;
+    }
+
+    @DeleteMapping("/delete")
+    public String deleteIdea(@RequestParam("ideaId") Integer ideaId) {
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+
+        String result = ideaService.deleteIdeaPost(ideaId, authentication.getName());
+
+        return result;
     }
 
 

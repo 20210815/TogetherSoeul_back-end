@@ -30,6 +30,9 @@ public class Festival {
     @Column(nullable = false, length = 500)
     private String location;
 
+    @Column(nullable = false, length = 500)
+    private String region;
+
     @Column(nullable = false)
     private String startDay;
 

@@ -25,6 +25,9 @@ public class FestivalDTO {
     private String location;
 
     @Nullable
+    private String region;
+
+    @Nullable
     private String startDay;
 
     @Nullable

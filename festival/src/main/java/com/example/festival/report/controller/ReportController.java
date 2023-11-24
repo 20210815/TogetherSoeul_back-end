@@ -30,14 +30,14 @@ public class ReportController {
     }
 
     @PostMapping("")
-    public String reportCreate(@RequestParam("report") String reportDto, @RequestParam("image")MultipartFile multipartFile) throws IOException {
+    public String reportCreate(@RequestParam("report") String reportDto, @RequestParam("image")List<MultipartFile> multipartFiles) throws IOException {
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
 
         ObjectMapper mapper = new ObjectMapper();
         ReportDto mapperReportDto = mapper.readValue(reportDto, ReportDto.class);
 
-        String imageFile = amazonS3Service.saveFile(multipartFile);
-        mapperReportDto.setImage(imageFile);
+        List<String> imageFile = amazonS3Service.saveFiles(multipartFiles);
+        mapperReportDto.setImage(imageFile.toString());
 
 
         this.reportService.reportCreate(authentication.getName(), mapperReportDto);
@@ -55,13 +55,13 @@ public class ReportController {
     }
 
     @PatchMapping("/{reportId}")
-    public void reportUpdate(@PathVariable("reportId")Integer reportId, @RequestParam("image") MultipartFile multipartFile, @RequestParam("report") String reportDto) throws IOException{
+    public void reportUpdate(@PathVariable("reportId")Integer reportId, @RequestParam("image") List<MultipartFile> multipartFiles, @RequestParam("report") String reportDto) throws IOException{
 
         ObjectMapper mapper = new ObjectMapper();
         ReportDto mapperReportDto = mapper.readValue(reportDto, ReportDto.class);
 
-        String imageFile = amazonS3Service.saveFile(multipartFile);
-        mapperReportDto.setImage(imageFile);
+        List<String> imageFile = amazonS3Service.saveFiles(multipartFiles);
+        mapperReportDto.setImage(imageFile.toString());
 
         this.reportService.reportUpdate(reportId, mapperReportDto);
     }

@@ -32,14 +32,14 @@ public class PartnerController {
 
 
     @PostMapping("")
-    public String partnerCreate(@RequestParam("partner") String partnerDto, @RequestParam("image") MultipartFile multipartFile) throws IOException {
+    public String partnerCreate(@RequestParam("partner") String partnerDto, @RequestParam("image") List<MultipartFile> multipartFiles) throws IOException {
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication(); //현재 로그인한 사용자 정보
 
         ObjectMapper mapper = new ObjectMapper();
         PartnerDto mapperPartnerDto = mapper.readValue(partnerDto, PartnerDto.class);
 
-        String imageFile = amazonS3Service.saveFile(multipartFile);
-        mapperPartnerDto.setImage(imageFile);
+        List<String> imageFile = amazonS3Service.saveFiles(multipartFiles);
+        mapperPartnerDto.setImage(imageFile.toString());
         this.partnerService.partnerCreate(authentication.getName(), mapperPartnerDto);
 
         return "게시글 등록 완료";
@@ -56,7 +56,7 @@ public class PartnerController {
     }
 
     @PatchMapping("/{partnerId}")
-    public void partnerUpdate(@PathVariable("partnerId") Integer partnerId, @RequestParam("partner") String partnerDto, @RequestParam("image") MultipartFile multipartFile) throws IOException{
+    public void partnerUpdate(@PathVariable("partnerId") Integer partnerId, @RequestParam("partner") String partnerDto, @RequestParam("image") List<MultipartFile> multipartFiles) throws IOException{
 
 //        if (partnerDto != null) {
 //            String imageFile = uploadFileService.storeFile(multipartFile);
@@ -67,8 +67,8 @@ public class PartnerController {
         ObjectMapper mapper = new ObjectMapper();
         PartnerDto mapperPartnerDto = mapper.readValue(partnerDto, PartnerDto.class);
 
-        String imageFile = amazonS3Service.saveFile(multipartFile);
-        mapperPartnerDto.setImage(imageFile);
+        List<String> imageFile = amazonS3Service.saveFiles(multipartFiles);
+        mapperPartnerDto.setImage(imageFile.toString());
 
         this.partnerService.partnerUpdate(partnerId, mapperPartnerDto);
     }

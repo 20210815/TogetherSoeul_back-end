@@ -15,4 +15,6 @@ public interface IdeaService {
 
     Optional<GetIdea> ideaDetail(Integer ideaId);
 
+    String deleteIdeaPost(Integer ideaId, String identify);
+
 }
