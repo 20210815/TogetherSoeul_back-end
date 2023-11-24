@@ -61,6 +61,15 @@ public class IdeaController {
         return idea;
     }
 
+    @DeleteMapping("/delete")
+    public String deleteIdea(@RequestParam("ideaId") Integer ideaId) {
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+
+        String result = ideaService.deleteIdeaPost(ideaId, authentication.getName());
+
+        return result;
+    }
+
 
 
 }

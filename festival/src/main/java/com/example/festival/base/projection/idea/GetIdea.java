@@ -24,5 +24,6 @@ public interface GetIdea {
         String getNickname();
         String getIdentify();
         String getImage();
+        String getAddress();
     }
 }
