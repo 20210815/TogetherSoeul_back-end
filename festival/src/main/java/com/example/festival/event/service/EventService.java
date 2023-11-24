@@ -14,7 +14,7 @@ public interface EventService {
 
     Optional<Event> eventDetail(Integer eventId);
 
-    List<Event> searchEvent(String keyword, Integer state);
+    List<Event> searchEvent(String keyword, Integer state, String region);
 
     List<Event> eventStateList(Integer state);
 

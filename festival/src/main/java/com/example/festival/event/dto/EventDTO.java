@@ -26,6 +26,9 @@ public class EventDTO {
     private String location;
 
     @Nullable
+    private String region;
+
+    @Nullable
     private String rule;
 
     @Nullable

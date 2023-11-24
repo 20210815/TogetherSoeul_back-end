@@ -12,9 +12,17 @@ public interface EventRepository extends JpaRepository<Event, Integer> {
 
     Optional<Event> findByEventId(Integer eventId);
 
-    List<Event> findByTitleContainingOrLocationContaining(String keyword, String LocationKeyword);
+    // 상태랑 구 모두 입력
+    List<Event> findByStateAndRegionAndTitleContainingOrLocationContaining(Integer state, String region, String keyword, String LocationKeyword);
 
+    // 상태만 입력
     List<Event> findByStateAndTitleContainingOrLocationContaining(Integer state, String keyword, String LocationKeyword);
+
+    //구만 입력
+    List<Event> findByRegionAndTitleContainingOrLocationContaining(String region, String keyword, String LocationKeyword);
+
+    //아무것도 입력 안 함
+    List<Event> findByTitleContainingOrLocationContaining(String keyword, String LocationKeyword);
 
     List<Event> findByState(Integer state);
 

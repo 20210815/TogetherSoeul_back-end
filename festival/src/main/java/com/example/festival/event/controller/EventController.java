@@ -56,9 +56,9 @@ public class EventController {
     }
 
     @GetMapping("/search")
-    public List<Event> searchEvent(@RequestParam("keyword") String keyword, @RequestParam("state") Integer state) {
+    public List<Event> searchEvent(@RequestParam(value="state", required = false) Integer state, @RequestParam(value="region", required = false) String region, @RequestParam("keyword") String keyword) {
 
-        List<Event> list = eventService.searchEvent(keyword, state);
+        List<Event> list = eventService.searchEvent(keyword, state, region);
 
         return list;
     }
